@@ -1,7 +1,7 @@
 class StaticPagesController < ApplicationController
 
 	def home
-		@quotes = Uquote.all
+		@quotes = Uquote.order("created_at DESC")
 		@quote = Uquote.new
 	end
 
