@@ -1,3 +1,4 @@
+<% if !current_user.nil? %>
 <div class="accordion" id="accordion2">
   <div class="accordion-group">
     <div class="accordion-heading">
@@ -14,7 +15,7 @@
 
 					<%= f.label :username, "Vem sa det?" %>
 					<%= f.text_field :username %>
-
+					<br>
 				   	<%= f.submit "Spara citat" %>
 				<% end %>
 
@@ -22,11 +23,14 @@
     </div>
   </div>
 </div>
-
+<% end %>
 <% if @quotes.any? %>
 	<% @quotes.each do |quote| %>
 		<p class="quote">
-			<%= quote.citat %>
+				<%= quote.citat %>
+			<% if !current_user.nil? %>
+				<%= link_to '<i class="icon-pencil pull-right"></i>'.html_safe, edit_uquote_path(quote) %> 
+			<% end %>
 		</p>
 		<p class="quoter">
 			- <%= quote.username %>

@@ -12,7 +12,12 @@
     <% end %>
     <div class="dkmCitat">
       <center>
-        <%= image_tag 'logo.png' %>
+        <% if current_user.nil?  %>
+          <%= link_to (image_tag 'logo.png'), signin_path %><br>
+        <% else %>
+          <%= link_to (image_tag 'logo.png'), signout_path %><br>
+          You're logged in as <b><%= current_user.username %></b>
+        <% end %>
       </center>
     </div>
     <div class="row">

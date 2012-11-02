@@ -1,0 +1,10 @@
+<%= form_for(@quote) do |f| %>  
+
+<%= f.label :citat, "Vad var det som sades?" %>
+<%= f.text_field :citat %>
+
+<%= f.label :username, "Vem sa det?" %>
+<%= f.text_field :username %>
+<br>
+<%= f.submit "Spara citat" %>
+<% end %>

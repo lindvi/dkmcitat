@@ -3,7 +3,12 @@ Citat::Application.routes.draw do
   root to: 'static_pages#home'
 
   resources :uquotes
+  resources :sessions
+  resources :users
 
+  match '/signin', to: 'sessions#new'
+  match '/signout', to: 'sessions#destroy'
+  match '/signup', to: 'users#new'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
