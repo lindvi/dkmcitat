@@ -1,0 +1,2 @@
+module UquotesHelper
+end

@@ -1,0 +1,37 @@
+<div class="accordion" id="accordion2">
+  <div class="accordion-group">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+        Nytt citat
+      </a>
+    </div>
+    <div id="collapseOne" class="accordion-body collapse">
+      <div class="accordion-inner">
+				<%= form_for(@quote) do |f| %>  
+
+					<%= f.label :citat, "Vad var det som sades?" %>
+					<%= f.text_field :citat %>
+
+					<%= f.label :username, "Vem sa det?" %>
+					<%= f.text_field :username %>
+
+				   	<%= f.submit "Spara citat" %>
+				<% end %>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<% if @quotes.any? %>
+	<% @quotes.each do |quote| %>
+		<p class="quote">
+			<%= quote.citat %>
+		</p>
+		<p class="quoter">
+			- <%= quote.username %>
+		</p>
+	<% end %>
+<% else %>
+	<h3>No quotes</h3>
+<% end %>

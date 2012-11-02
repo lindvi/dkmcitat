@@ -1,0 +1,38 @@
+@import "bootstrap";
+@import "bootstrap-responsive";
+
+$iamgeSpritePath: asset-url('glyphicons-halflings.png', image);
+$imageWhiteSpritePath: asset-url('glyphicons-halflings-white.png', image);
+
+body{
+	background-image: url('grey.png');	
+}
+
+a:link, a:visited, a:active {
+	color: #a9a9a9;
+	
+	a.menu{
+		font-weight: normal;
+		font-size: 11px;
+		text-decoration: none;
+	}
+}    
+
+a:hover{
+	color: #121212;
+}
+
+.dkmCitat{
+	padding-top: 100px;
+}
+
+.quote{
+	margin-bottom: 0px;
+	font-size: 12px;
+}
+
+.quoter{
+	margin-top:0px;
+	font-style: italic;
+	font-size: 10px;
+}
