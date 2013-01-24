@@ -23,9 +23,7 @@
 				<%= quote.citat %><%= link_to '<i class="icon-pencil"></i>'.html_safe, '', class: "pull-right" %>
 			</p>
 			<p class="quoter">
-				 - <%= quote.username %>
-			</p>
-			<p class="quoter">
+				 - <%= quote.username %><br>
 				<%= quote.created_at %>
 			</p>
 		<% end %>
