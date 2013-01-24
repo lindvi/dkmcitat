@@ -1,14 +1,9 @@
 <% if !current_user.nil? %>
-<div class="accordion" id="accordion2">
-  <div class="accordion-group">
-    <div class="accordion-heading">
-      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
-        Nytt citat
-      </a>
-    </div>
-    <div id="collapseOne" class="accordion-body collapse">
-      <div class="accordion-inner">
-				<%= form_for(@quote) do |f| %>  
+<br>
+<%= link_to "New quote", '', :remote => true , :id =>"wat"%><br>
+
+<div id="hideThis">
+<%= form_for(@quote) do |f| %>  
 
 					<%= f.label :citat, "Vad var det som sades?" %>
 					<%= f.text_field :citat %>
@@ -16,26 +11,24 @@
 					<%= f.label :username, "Vem sa det?" %>
 					<%= f.text_field :username %>
 					<br>
-				   	<%= f.submit "Spara citat" %>
+				   	<%= f.submit "Spara citat" , id: "sendQuote" %>
 				<% end %>
-
-      </div>
-    </div>
-  </div>
 </div>
-<% end %>
-<% if @quotes.any? %>
+<br>
+<br>
+<div id="quotes">
 	<% @quotes.each do |quote| %>
-		<p class="quote">
-				<%= quote.citat %>
-			<% if !current_user.nil? %>
-				<%= link_to '<i class="icon-pencil pull-right"></i>'.html_safe, edit_uquote_path(quote) %> 
-			<% end %>
-		</p>
-		<p class="quoter">
-			- <%= quote.username %>
-		</p>
+		<%= div_for quote do %>
+			<p class="quote">
+				<%= quote.citat %><%= link_to '<i class="icon-pencil"></i>'.html_safe, '', class: "pull-right" %>
+			</p>
+			<p class="quoter">
+				 - <%= quote.username %>
+			</p>
+			<p class="qouter">
+				<%= quote.created_at %>
+			</p>
+		<% end %>
 	<% end %>
-<% else %>
-	<h3>No quotes</h3>
+</div>
 <% end %>

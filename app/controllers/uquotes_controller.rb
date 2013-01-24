@@ -21,8 +21,10 @@ class UquotesController < ApplicationController
 		else
 			flash[:failure] = "FEL"
 		end
-
-		redirect_to root_path
+		respond_to do |format|
+			format.html { redirect_to root_path }
+			format.js
+		end
 	end
 
 

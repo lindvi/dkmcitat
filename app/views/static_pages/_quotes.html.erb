@@ -1,0 +1,8 @@
+<%= div_for quote do %>
+  <span class="dateandoptions">
+    Posted <%=time_ago_in_words(quote.created_at)%> ago<br />
+  </span>
+	<p><b><%= quote.username %></b> said:</p>
+	<br />
+  	<%= quote.citat %>
+<% end %>
