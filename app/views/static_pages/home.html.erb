@@ -20,7 +20,7 @@
 	<% @quotes.each do |quote| %>
 		<%= div_for quote do %>
 			<p class="quote">
-				<%= quote.citat %><%= link_to '<i class="icon-pencil"></i>'.html_safe, edit_uquotes_path(quote), class: "pull-right" %>
+				<%= quote.citat %><%= link_to '<i class="icon-pencil"></i>'.html_safe, edit_uquote_path(quote), class: "pull-right" %>
 			</p>
 			<p class="quoter">
 				 - <%= quote.username %><br>
