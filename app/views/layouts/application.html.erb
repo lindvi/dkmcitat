@@ -17,7 +17,9 @@
         <% else %>
           <%= link_to (image_tag 'logo.png'), signout_path %><br>
           You're logged in as <b><%= current_user.username %></b><br>
-          <span id="comments_count"><%= pluralize(@quotes.count, "quote") %> in the dkm#Citat-system</span>
+          <% if !@quotes.nil? %>
+            <span id="comments_count"><%= pluralize(@quotes.count, "quote") %> in the dkm#Citat-system</span>
+          <% end %>
         <% end %>
       </center>
     </div>
