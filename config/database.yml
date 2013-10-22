@@ -23,6 +23,6 @@ production:
   database: citat
   username: postgres
   password: unisl
-  host:localhost
+  host: localhost
   pool: 5
   timeout: 5000

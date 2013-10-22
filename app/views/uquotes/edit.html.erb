@@ -5,6 +5,14 @@
 
 <%= f.label :username, "Vem sa det?" %>
 <%= f.text_field :username %>
+
+<%= f.label :context, "Context? Typ vilken fest etc" %>
+<%= f.text_field :context %>
+
+
+<%= f.label :image, "OMGZ BILDER" %>
+<%= f.file_field :image %>
+
 <br>
 <%= f.submit "Spara citat" %>
 <% end %>

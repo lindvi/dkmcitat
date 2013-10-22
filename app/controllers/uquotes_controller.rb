@@ -29,7 +29,9 @@ class UquotesController < ApplicationController
 
 
 	def destroy
-
+		@quote = Uquote.find(params[:id])
+		@quote.destroy
+		redirect_to root_path
 	end
 
 end

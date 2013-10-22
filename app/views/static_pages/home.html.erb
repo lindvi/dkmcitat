@@ -3,13 +3,20 @@
 <%= link_to "New quote", '', :remote => true , :id =>"wat"%><br>
 
 <div id="hideThis">
-<%= form_for(@quote) do |f| %>  
+<%= form_for @quote, :url => uquotes_path, :html => { :multipart => true } do |f| %>  
 
 					<%= f.label :citat, "Vad var det som sades?" %>
 					<%= f.text_field :citat %>
 
 					<%= f.label :username, "Vem sa det?" %>
 					<%= f.text_field :username %>
+
+					<%= f.label :context, "Context? Typ vilken fest etc" %>
+					<%= f.text_field :context %>
+
+					<%= f.label :image, "OMGZ BILDER" %>
+					<%= f.file_field :image %>
+
 					<br>
 				   	<%= f.submit "Spara citat" , id: "sendQuote" %>
 				<% end %>
@@ -20,9 +27,14 @@
 	<% @quotes.each do |quote| %>
 		<%= div_for quote do %>
 			<p class="quote">
-				<%= quote.citat %><%= link_to '<i class="icon-pencil"></i>'.html_safe, edit_uquote_path(quote), class: "pull-right" %>
+				<%= quote.citat %><%= link_to '<i class="icon-pencil"></i>'.html_safe, edit_uquote_path(quote), class: "pull-right btn btn-mini" %> <%= link_to '<i class="icon-remove-sign"></i>'.html_safe, quote, method: :delete, data: { confirm: "Är du säker på att du vill ta bort citatet?" }, class: "pull-right btn btn-mini" %>
+				<br>
+				<% if quote.image.present? %>
+					<%= image_tag quote.image.url %>
+				<% end %>
 			</p>
 			<p class="quoter">
+				<%= "@" + (quote.context ) unless quote.context.nil? %><br>
 				 - <%= quote.username %><br>
 				<%= quote.created_at %>
 			</p>
