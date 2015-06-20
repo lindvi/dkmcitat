@@ -13,7 +13,7 @@ end
 
 gem 'RedCloth'
 gem 'bootstrap-sass'
-gem 'bcrypt-ruby'
+gem 'bcrypt-ruby', '3.0.1'
 gem 'annotate'
 
 
