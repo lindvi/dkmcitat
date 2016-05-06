@@ -1,0 +1,734 @@
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: schema_migrations; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE schema_migrations (
+    version character varying(255) NOT NULL
+);
+
+
+ALTER TABLE public.schema_migrations OWNER TO postgres;
+
+--
+-- Name: uquotes; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE uquotes (
+    id integer NOT NULL,
+    citat text,
+    username character varying(255),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    context text,
+    image_file_name character varying(255),
+    image_content_type character varying(255),
+    image_file_size integer,
+    image_updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.uquotes OWNER TO postgres;
+
+--
+-- Name: uquotes_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE uquotes_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.uquotes_id_seq OWNER TO postgres;
+
+--
+-- Name: uquotes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE uquotes_id_seq OWNED BY uquotes.id;
+
+
+--
+-- Name: users; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE users (
+    id integer NOT NULL,
+    username character varying(255),
+    password_digest character varying(255),
+    remember_token text,
+    admin boolean,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.users OWNER TO postgres;
+
+--
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE users_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.users_id_seq OWNER TO postgres;
+
+--
+-- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE users_id_seq OWNED BY users.id;
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY uquotes ALTER COLUMN id SET DEFAULT nextval('uquotes_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
+
+
+--
+-- Data for Name: schema_migrations; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY schema_migrations (version) FROM stdin;
+20121031143724
+20121102125200
+20131022171931
+20131022172759
+\.
+
+
+--
+-- Data for Name: uquotes; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY uquotes (id, citat, username, created_at, updated_at, context, image_file_name, image_content_type, image_file_size, image_updated_at) FROM stdin;
+2	Det är min dag idag!	 Silly	2012-11-02 12:42:13.528511	2012-11-02 12:42:13.528511	\N	\N	\N	\N	\N
+4	"Sometimes you need to get your hands dirty." "To get your penis hard."	Arvin Razavi, Emil Lyrner	2012-11-02 13:02:46.162351	2012-11-02 13:02:46.162351	\N	\N	\N	\N	\N
+5	Du ser ju typ... Ful ut!	Nisse	2012-11-02 13:28:21.480636	2012-11-02 13:28:21.480636	\N	\N	\N	\N	\N
+6	Det var inte jag som grät, det var min kropp.	Anna	2012-11-02 13:35:17.203107	2012-11-02 13:35:17.203107	\N	\N	\N	\N	\N
+3	Snigla, det är fan äckligt. Men olla, det är fan en konstform.	Denise	2012-11-02 12:46:10.663097	2012-11-02 14:30:47.810835	\N	\N	\N	\N	\N
+1	Vad fan händz?!	Nilse	2012-11-02 11:19:02.131055	2012-11-02 14:31:02.969971	\N	\N	\N	\N	\N
+7	Innis & Gunn smakar fan discofitta	Mange	2012-11-02 19:54:24.316959	2012-11-02 19:54:24.316959	\N	\N	\N	\N	\N
+53	Ey, tjålade nån vår balle?	Mange	2012-12-15 17:36:10.519197	2012-12-15 17:36:10.519197	\N	\N	\N	\N	\N
+54	Jag tar henne i kuken	Bratzers	2012-12-16 04:44:59.051013	2012-12-16 04:44:59.051013	\N	\N	\N	\N	\N
+8	Sparris är som en kuk, toppen är alltid bäst. 	Bratt 	2012-11-02 19:58:57.608295	2012-11-02 20:01:29.795981	\N	\N	\N	\N	\N
+11	Det är typ Arvins årgång! (Om låten Eloise)	 Sparkles	2012-11-02 22:48:48.944641	2012-11-02 22:48:48.944641	\N	\N	\N	\N	\N
+12	Jag har inget! (Om tjejer)	 Axel	2012-11-02 22:50:01.284275	2012-11-02 22:50:01.284275	\N	\N	\N	\N	\N
+13	Jag känner mig som en tjock Pikachu!	 Magnus	2012-11-02 23:58:09.369559	2012-11-02 23:58:09.369559	\N	\N	\N	\N	\N
+14	Flytta på dig, jag har inte sex med dig!	Anna	2012-11-03 00:29:23.888698	2012-11-03 00:29:23.888698	\N	\N	\N	\N	\N
+16	Varför heter det Penis? Vem fan vill ha penis i sig?	 Anna	2012-11-03 00:40:44.125573	2012-11-03 00:40:44.125573	\N	\N	\N	\N	\N
+17	Jag gillar honom, men han är en douche!	Okänd	2012-11-03 01:29:02.551698	2012-11-03 01:29:02.551698	\N	\N	\N	\N	\N
+18	Om jag var civilklädd hade jag gått ut och bankat skiten ur horungarna!	arg busschaufför (som fått sten på bussen)	2012-11-03 14:41:21.627694	2012-11-03 14:41:21.627694	\N	\N	\N	\N	\N
+19	FAN VAD BRA, JAG KOM PRECIS I MIN MUN!	Silly (ang. Silly Fisting Sparkles)	2012-11-07 14:57:33.663649	2012-11-07 14:57:33.663649	\N	\N	\N	\N	\N
+10	Jag har blivit dränkt i det mesta ikväll, jag är avtrubbad	Fi$hie	2012-11-02 21:24:47.860259	2012-11-07 14:59:11.153392	\N	\N	\N	\N	\N
+9	Fy nedrans, jag har slickat på för många saker idag! 	Fi$hie	2012-11-02 20:02:35.644897	2012-11-07 14:59:25.777305	\N	\N	\N	\N	\N
+20	Elin, gör en sats i den där också.	Jesper Bratt	2012-11-09 10:55:34.298441	2012-11-09 10:55:34.298441	\N	\N	\N	\N	\N
+21	Alltså, ska jag slänga in min i din eller? 	Arvin 	2012-11-09 11:33:27.549773	2012-11-09 11:33:27.549773	\N	\N	\N	\N	\N
+22	Hur många onsdagspubar har vi per år? 200?	Sophie Davidsson	2012-11-14 21:39:41.335885	2012-11-14 21:39:41.335885	\N	\N	\N	\N	\N
+23	Fan, Jag HATAR att spara saker!	Fi$hie	2012-11-16 07:58:44.083549	2012-11-16 07:58:44.083549	\N	\N	\N	\N	\N
+24	Jag ska nog inte dricka så mycket vin ikväll!	 Gunning (Om ettans fest)	2012-11-17 15:46:05.695344	2012-11-17 15:46:05.695344	\N	\N	\N	\N	\N
+25	Killar på data tafsar hela tiden på varandra, det gör att tjejer känner sig utelämnade, alltså måste killar tafsa mer på tjejer! 	Jämlikhetsnämndens ordförande (Putte) 	2012-11-17 21:31:34.296914	2012-11-17 21:31:34.296914	\N	\N	\N	\N	\N
+26	anna är den bästä wän8nnisskan ir yärlden	anna	2012-11-19 21:07:59.462044	2012-11-19 21:07:59.462044	\N	\N	\N	\N	\N
+27	Jag har bara druckit en punsch!	anna (efter äps)	2012-11-19 21:08:23.619885	2012-11-19 21:08:23.619885	\N	\N	\N	\N	\N
+28	Jag hade haft sex med honom ifall jag va ett barn	-Nisse (Om pedofil-Simon)	2012-11-23 14:12:09.139986	2012-11-23 14:12:09.139986	\N	\N	\N	\N	\N
+29	Jag är fan köttig men hon va riktigt kraftig	Anna	2012-11-23 22:31:06.244284	2012-11-23 22:31:06.244284	\N	\N	\N	\N	\N
+30	Hon var bara bacon!	Arvin	2012-11-23 22:31:42.884187	2012-11-23 22:31:42.884187	\N	\N	\N	\N	\N
+31	Sex och fitta är synonymt, om man inte är killbög.	Den Brattz	2012-11-24 23:51:31.898455	2012-11-24 23:51:31.898455	\N	\N	\N	\N	\N
+32	Kolla Sara, jag kan ta stora saker i munnen!	Skuttis	2012-11-24 23:57:55.216516	2012-11-25 00:31:42.661757	\N	\N	\N	\N	\N
+33	Alltså, definitionen av en svart tjej är att hon har jagat middagen med ett spjut.	Den den Brattz den. Den.	2012-11-25 01:51:42.235536	2012-11-25 01:51:42.235536	\N	\N	\N	\N	\N
+34	Nisse: har du en jacuzzi? Arvin: jag har en nejcuzzi.	Två korvar	2012-11-25 02:26:09.84855	2012-11-25 02:26:09.84855	\N	\N	\N	\N	\N
+35	Det är som att röka luft! 	Bratt om att andas. 	2012-11-25 11:52:14.936039	2012-11-25 11:52:14.936039	\N	\N	\N	\N	\N
+36	Jaha, det var ju en brownie! Trodde det var en köttbulle	Emil	2012-11-25 12:24:49.944935	2012-11-25 12:24:49.944935	\N	\N	\N	\N	\N
+37	Bratt: undra vad det är för storlek på hennes ovve. Arvin: XXWhale	Bratt och Arvin om en val som fastnat i en SU-ovve och strandat på punschbrunchen	2012-11-25 12:34:26.393279	2012-11-25 12:34:26.393279	\N	\N	\N	\N	\N
+38	Alltså... Jag gillar min penis ibland! 	Anna olsson	2012-11-25 13:18:36.827397	2012-11-25 13:18:36.827397	\N	\N	\N	\N	\N
+39	Jag är van. Jag brukar få massa bollar i huvet.	den Ann	2012-11-25 14:44:56.557242	2012-11-25 14:44:56.557242	\N	\N	\N	\N	\N
+40	Det var ju inte bara en. Jag fick plats med fyra i munnen samtidigt.	Rödöö	2012-11-25 15:27:27.212329	2012-11-25 15:27:27.212329	\N	\N	\N	\N	\N
+41	Det är ju inte så jag ba, "OHMYGOD ta mig"!	 Anna (Om att få ligga)	2012-11-28 23:47:11.276374	2012-11-28 23:47:11.276374	\N	\N	\N	\N	\N
+42	Jag kan få ragg, jag fick ragg, men jag vill inte ligga!	 Anna (Om att få ligga)	2012-11-28 23:47:52.131093	2012-11-28 23:47:52.131093	\N	\N	\N	\N	\N
+43	"Vad har du för preferenser?", "Tjejer"	Axel, Sparkles	2012-11-30 20:10:20.119955	2012-11-30 20:10:20.119955	\N	\N	\N	\N	\N
+44	"Alkoholproblem", "INGA PROBLEM!"	Nisse, sparkles	2012-11-30 20:22:55.207519	2012-11-30 20:22:55.207519	\N	\N	\N	\N	\N
+45	Alltså paniken när den kommer mot ansiktet, man bara "träffa inte min tunga!"	Anna	2012-12-02 14:29:36.627194	2012-12-02 14:29:36.627194	\N	\N	\N	\N	\N
+46	Det är en perfekt sak att ha i ovven, för ibland rör man snuskiga saker!	Anna, om handsprit	2012-12-02 14:35:45.129071	2012-12-02 14:44:46.064398	\N	\N	\N	\N	\N
+47	Ja, jag brukar få små vita bollar i ögat!	Denise	2012-12-02 22:10:11.40495	2012-12-02 22:10:11.40495	\N	\N	\N	\N	\N
+48	Man bara random-gnuggar lite och hoppas på det bästa	The Knees	2012-12-05 23:49:03.967339	2012-12-05 23:49:44.693243	\N	\N	\N	\N	\N
+49	I Don't care, I fuck it!	Avis & Sparkles	2012-12-05 23:50:31.591747	2012-12-05 23:50:40.630035	\N	\N	\N	\N	\N
+50	Mina boobs luktar mat!	Anna	2012-12-08 12:12:08.920899	2012-12-08 12:12:08.920899	\N	\N	\N	\N	\N
+55	Det var som att tandläkaren hade sprutat munnen full, och så sög man på den!	Denise	2012-12-16 22:05:45.697807	2012-12-16 22:05:45.697807	\N	\N	\N	\N	\N
+51	"Alla har sina ups and downs." "Jag har bara downs!"	Avis, Fi$hie	2012-12-11 22:57:29.00581	2012-12-11 23:02:55.62872	\N	\N	\N	\N	\N
+52	Nös jag precis?	Fi$ting	2012-12-13 03:25:13.324597	2012-12-13 03:25:13.324597	\N	\N	\N	\N	\N
+56	Du måste ta hela i munnen, Anna!	Avis	2012-12-16 23:08:50.279588	2012-12-16 23:08:50.279588	\N	\N	\N	\N	\N
+57	Den är god, jag lovar!	Anna (När hon håller en spit or swallow i handen)	2012-12-16 23:09:06.072447	2012-12-16 23:09:06.072447	\N	\N	\N	\N	\N
+58	Man njuter inte av någonting så mycket som när man har hela munnen full av det.	Denise	2012-12-16 23:52:53.825331	2012-12-16 23:52:53.825331	\N	\N	\N	\N	\N
+59	Man tar en tjock och stoppar hela i munnen och aweaergawergaweg	Akzel Plz	2012-12-17 00:00:08.258854	2012-12-17 00:00:08.258854	\N	\N	\N	\N	\N
+60	Den här limen var ju typ 95% lime, helt jävla värdelös.	Elin	2012-12-17 00:08:03.117641	2012-12-17 00:08:03.117641	\N	\N	\N	\N	\N
+61	Jag hörde inte, men jag hörde att det var stupid!	Anna	2012-12-17 00:08:16.641628	2012-12-17 00:08:16.641628	\N	\N	\N	\N	\N
+62	Har du någonsin druckit en isbjörn?	Bratt (till Axel)	2012-12-17 01:22:36.758347	2012-12-17 01:22:36.758347	\N	\N	\N	\N	\N
+63	Ja men ingen kommer ju på mina!	Akzel	2012-12-17 03:20:00.561369	2012-12-17 03:20:00.561369	\N	\N	\N	\N	\N
+64	Dom kommer inte märka någonting när du ligger där, du är ju svart...	Denise (jävla rasse)	2012-12-17 03:23:53.35828	2012-12-17 03:23:53.35828	\N	\N	\N	\N	\N
+65	Aldrig att jag gapar så att du kan stoppa in den! 	Denise	2012-12-18 18:43:12.376512	2012-12-18 18:43:12.376512	\N	\N	\N	\N	\N
+66	Är det bara DKM kvar eller? För jag spydde.	Akz	2012-12-20 02:29:31.333605	2012-12-20 02:29:31.333605	\N	\N	\N	\N	\N
+67	Snooki är värst. Men jag tycker lite om henne 	Köttiz 	2012-12-22 20:41:38.612119	2012-12-22 20:41:38.612119	\N	\N	\N	\N	\N
+68	Du är awesome, du har the shit i dig! 	Arvin	2012-12-22 22:10:48.065808	2012-12-22 22:10:48.065808	\N	\N	\N	\N	\N
+69	Hellre oviktig än överviktig!	Victor Hallberg	2013-01-01 19:21:26.937029	2013-01-01 19:21:26.937029	\N	\N	\N	\N	\N
+70	Pucci och finess är som gul och lila	Mange/Pucci	2013-01-03 21:24:40.403408	2013-01-03 21:24:40.403408	\N	\N	\N	\N	\N
+71	How does that doesn't work?	Felin	2013-01-04 02:00:41.414927	2013-01-04 02:00:41.414927	\N	\N	\N	\N	\N
+72	Ska vi med det här tåget?	Sparkles, efter att vi åkt med tåget i en station	2013-01-04 14:35:07.639037	2013-01-04 14:35:07.639037	\N	\N	\N	\N	\N
+73	Jag har ju blivit sänkt av en plastfitta	Den Mang	2013-01-07 17:38:14.817172	2013-01-07 17:38:14.817172	\N	\N	\N	\N	\N
+74	Hur många månader är det på ett år? 12?	Sophie Davidsson	2013-01-09 14:49:30.175277	2013-01-09 14:49:30.175277	\N	\N	\N	\N	\N
+75	She's all wet, and it's freaking me out!	Sparkles	2013-01-12 21:58:32.115096	2013-01-12 21:58:32.115096	\N	\N	\N	\N	\N
+76	Wtf happened, I have a ball in my hand!	Fi$hie	2013-01-13 15:28:45.263002	2013-01-13 15:28:45.263002	\N	\N	\N	\N	\N
+77	Det kändes bra i min mun.	Anna	2013-01-16 15:04:09.195758	2013-01-16 15:04:09.195758	\N	\N	\N	\N	\N
+78	Jag skulle hellre bli påsatt bakifrån av en tjej med strap-on än att ha sex med en kille	Bratzie	2013-01-16 18:27:36.999433	2013-01-16 18:27:36.999433	\N	\N	\N	\N	\N
+79	Hur äter man emellan två ben? Aha, man petar emellan!	Brattilischous	2013-01-16 18:57:46.603634	2013-01-16 18:57:46.603634	\N	\N	\N	\N	\N
+80	Ermahgurd, jag kan inte svälja!	Fisk fisk fisk	2013-01-16 22:56:52.236733	2013-01-16 22:56:52.236733	\N	\N	\N	\N	\N
+83	Det är DKM kärlek i hela min mun! 	Anna	2013-01-19 00:54:39.134024	2013-01-19 00:54:39.134024	\N	\N	\N	\N	\N
+82	Det är dm 	BRATT!!!! 	2013-01-19 00:53:16.319863	2013-01-19 00:54:39.471631	\N	\N	\N	\N	\N
+84	I know that I suck, when I suck	Fi$hie	2013-01-20 02:21:20.113179	2013-01-20 02:21:20.113179	\N	\N	\N	\N	\N
+85	Min bästa kompis ska börja på mitt jobb, inte Elin alltså.	Anna	2013-01-21 14:27:49.470129	2013-01-21 14:27:49.470129	\N	\N	\N	\N	\N
+86	"Fan, laga mat är för tjejer" ... "Man skulle ha en sån"	Sebbe och Sparkles	2013-01-21 16:10:57.479468	2013-01-21 16:10:57.479468	\N	\N	\N	\N	\N
+87	Ja, men hon är jätteful ... och jag tror att hon är lesbisk ... och hon är jätteläskig ... och hon ser jättemanlig ut.	Anna	2013-01-21 18:34:33.365922	2013-01-21 18:34:33.365922	\N	\N	\N	\N	\N
+88	Hennes mamma är en lobster hennes pappa är en racoon	Dieselz	2013-01-21 20:24:29.007296	2013-01-21 20:24:29.007296	\N	\N	\N	\N	\N
+124	"Det blir ungefär två killar per tjej", "det är ju chill, det är tjejer gjorda för"	Brääät, GG	2013-04-02 18:29:41.487731	2013-04-02 18:29:50.357862	\N	\N	\N	\N	\N
+89	"Early fire? Oh you're young brother!" - "You wish you could fire!"	Arvin och Shrinkles	2013-01-22 21:33:00.79996	2013-01-22 21:33:45.512389	\N	\N	\N	\N	\N
+90	Shrinkle shrinkle, little thing...	Nisse	2013-01-22 23:43:14.988563	2013-01-22 23:43:14.988563	\N	\N	\N	\N	\N
+91	Jag använder lite alternative fingrar just nu, men det är allt jag har!	Anna	2013-01-24 00:28:08.100038	2013-01-24 00:28:08.100038	\N	\N	\N	\N	\N
+92	"Rapeception!" "Aka. prison"	Fishie och Errrwin	2013-01-25 14:57:14.879339	2013-01-25 14:57:14.879339	\N	\N	\N	\N	\N
+93	Mitt mål i livet är att vara en fitta mot dig.	Köttiz	2013-01-26 01:24:39.157791	2013-01-26 01:24:39.157791	\N	\N	\N	\N	\N
+94	altså jag bryr mig verkligen inte, nu slutar vi prata om det för jag blir arg.	Köttis	2013-01-27 00:05:12.535588	2013-01-27 00:05:12.535588	\N	\N	\N	\N	\N
+95	The cock of the north, den vill jag fan ha!	Puccisita	2013-01-27 22:36:10.965772	2013-01-27 22:36:10.965772	\N	\N	\N	\N	\N
+96	Det är som att spela rysk roulette med nakna tjejer.	Manguz	2013-01-28 15:46:44.130679	2013-01-28 15:46:44.130679	\N	\N	\N	\N	\N
+97	With great power... Comes alot of titties!	Arvin (första gången som SA)	2013-01-30 14:37:03.964113	2013-01-30 14:37:03.964113	\N	\N	\N	\N	\N
+98	Men jag har ju vit vecka!	Anna, med en öl i handen	2013-01-31 19:23:19.160706	2013-01-31 19:23:19.160706	\N	\N	\N	\N	\N
+99	Men den ser ju ut som blowjob, man förväntar ju sig att det ska vara krämigt liksom... 	Anna, om en blowjob-shot 	2013-01-31 19:24:52.723269	2013-01-31 19:24:52.723269	\N	\N	\N	\N	\N
+100	Det är standard varje kväll att jag får massa ragg	Annapanna	2013-02-02 00:53:12.407549	2013-02-02 00:53:12.407549	\N	\N	\N	\N	\N
+102	Satt ni samma fyra, alla tre?	Puccolini	2013-02-14 23:41:17.461975	2013-02-14 23:41:17.461975	\N	\N	\N	\N	\N
+103	"Vad fan är det som luktar?" - "Det är nån som värmer fisk i micron." - "Ja, det luktar fan punani... som är rutten..."	Emil - Arvin - Emil	2013-02-20 15:34:05.423029	2013-02-20 15:34:05.423029	\N	\N	\N	\N	\N
+104	She was like a god! - Buddah...	Pucciqua	2013-02-22 10:03:18.10732	2013-02-22 10:03:18.10732	\N	\N	\N	\N	\N
+105	Alltså jag känner typ hur du mår genom din lukt.	Anna till Robin	2013-02-22 10:30:00.566867	2013-02-22 10:30:00.566867	\N	\N	\N	\N	\N
+101	Humlegården är grym! Där våldtas fan folk!	Puccolini	2013-02-14 22:35:46.280307	2013-02-22 12:24:43.960315	\N	\N	\N	\N	\N
+106	Vad ska vi prata om nu då, om vi inte ska prata om judar och dvärgar?	Anna	2013-02-24 21:07:59.550932	2013-02-24 21:07:59.550932	\N	\N	\N	\N	\N
+107	Sara har inte så stora krav för att kalla saker långa	Aviz	2013-02-26 14:20:24.695792	2013-02-26 14:20:24.695792	\N	\N	\N	\N	\N
+108	Du kan förvänta dig väldigt mycket av min vänsterhand.	Anna	2013-02-26 14:21:57.572394	2013-02-26 14:21:57.572394	\N	\N	\N	\N	\N
+109	Kärlek på pinne är bra!	STAD-föreläsaren	2013-02-26 18:51:34.397683	2013-02-26 18:51:34.397683	\N	\N	\N	\N	\N
+110	Har ni tänkt på en sak? Man kan inte äta tunnbrödrulle framför nån man vill ligga med.	Akzel	2013-02-27 16:36:30.422073	2013-02-27 16:36:30.422073	\N	\N	\N	\N	\N
+111	Ibland önskar jag att jag aldrig hade kommit på att onanera. Då hade jag fan botat cancer.	Puccolini	2013-03-08 23:57:31.494855	2013-03-09 00:00:19.921395	\N	\N	\N	\N	\N
+112	Jag är inte full, jag är bara ärlig. 	Pucci 	2013-03-09 00:00:31.630034	2013-03-09 00:00:31.630034	\N	\N	\N	\N	\N
+113	Oj jävlar, jag fick fan... mensvärk.	Nilzzzzzzzzzz	2013-03-09 00:31:21.849442	2013-03-09 00:31:21.849442	\N	\N	\N	\N	\N
+114	I like my niggas black.	Bratzzerz	2013-03-11 18:05:02.446143	2013-03-11 18:05:02.446143	\N	\N	\N	\N	\N
+115	-"Det smakar ju som kuk doppad i godis" -"jag gillar ju det!"	Poya, Anna	2013-03-13 21:56:07.550184	2013-03-13 21:56:07.550184	\N	\N	\N	\N	\N
+81	Åh min härskare, erövra mina våtmarker! 	Snuskdennis 	2013-01-19 00:51:06.388097	2013-03-14 13:42:21.024189	\N	\N	\N	\N	\N
+116	Alltså, fransmän sväljer ganska mycket, helt enkelt 	Avis 	2013-03-15 14:49:16.089466	2013-03-15 14:49:16.089466	\N	\N	\N	\N	\N
+117	Den här sushin är bra, men jag sög av mig själv... och det var najsare.	Pooh-Chi	2013-03-18 19:41:34.5008	2013-03-18 19:42:28.717079	\N	\N	\N	\N	\N
+118	Det enda jag gillar mer än öl, är mer öl.	Ms. SnaxXx	2013-03-19 11:14:43.778258	2013-03-19 11:14:43.778258	\N	\N	\N	\N	\N
+119	"Det är ju stor skillnad på kalv och ko", "ja, det är ju inte ens samma djur"	Axel, Anna	2013-03-19 18:46:27.74597	2013-03-19 18:46:27.74597	\N	\N	\N	\N	\N
+125	Du vet inte hur kul jag kan ha med en kortlek	Mongobakis	2013-04-02 21:58:30.416643	2013-04-02 21:58:30.416643	\N	\N	\N	\N	\N
+120	Arvin ser ut som en gammal gubbe... Eller nej fan, han ser ut som en gammal tant!	Jonas notDaniels (om Arvin i glasögon)	2013-03-20 15:45:14.56746	2013-03-20 16:18:00.050516	\N	\N	\N	\N	\N
+122	Är det lugnt om jag håller i din korv? 	Anna	2013-03-27 17:17:45.503379	2013-03-27 17:17:45.503379	\N	\N	\N	\N	\N
+123	Jag hatar schemalagda kurser, jag vill kunna plugga kursen när jag vill och vara full när jag vill.	Felin	2013-04-02 11:45:53.316208	2013-04-02 11:45:53.316208	\N	\N	\N	\N	\N
+126	Att ligga är fan tråkigt, det är som att hacka lök. Det suger. 	Tjej på Media	2013-04-07 02:11:46.242065	2013-04-07 02:11:46.242065	\N	\N	\N	\N	\N
+127	Fan, nu kommer bakisbiten där ansiktet domnar bort	GG (sök läkarhjälp för i helvete)	2013-04-07 17:27:14.171047	2013-04-07 17:27:14.171047	\N	\N	\N	\N	\N
+128	I sömnen är alla brudar	Ak-säl	2013-04-15 13:29:53.909603	2013-04-15 13:29:53.909603	\N	\N	\N	\N	\N
+129	Killar är starkare än tjejer, annars skulle det inte bli några barn!	Mange	2013-04-15 18:56:13.863316	2013-04-15 18:56:13.863316	\N	\N	\N	\N	\N
+130	Nu när jag såg svärdet kommer jag bara lägga mig platt och älska allt! 	Arvins haff 	2013-04-17 00:16:09.740865	2013-04-17 00:16:09.740865	\N	\N	\N	\N	\N
+131	Sparkles du är bög, fast på homosexuella sätt	Puccisita	2013-04-18 18:49:19.210719	2013-04-18 18:49:19.210719	\N	\N	\N	\N	\N
+132	Jag tror jag har en mössa på mig	Pucci aka citatmaskinen	2013-04-18 19:01:54.403178	2013-04-18 19:01:54.403178	\N	\N	\N	\N	\N
+133	-Är det blod? -Nej, det är dörr.	Hurrwin; Mangarang aka Selectah	2013-04-21 02:00:28.405106	2013-04-21 02:00:28.405106	\N	\N	\N	\N	\N
+134	Du har en dörr i ansiktet.	Sparxx till Mangz	2013-04-21 02:21:47.694238	2013-04-21 02:21:47.694238	\N	\N	\N	\N	\N
+135	Hallå, får jag se din vagina eller?	Spronx	2013-04-21 02:54:52.283145	2013-04-21 02:54:52.283145	\N	\N	\N	\N	\N
+136	Så hon tog den i rumpan, och det gör inte så ont alls	Anna	2013-04-22 09:43:51.554746	2013-04-22 09:43:51.554746	\N	\N	\N	\N	\N
+137	"barnvakten sniglade våran bebis" - Aftonbladet	Avis <>	2013-04-22 18:07:10.548002	2013-04-22 18:07:10.548002	\N	\N	\N	\N	\N
+138	Menar du att JAG kan EXPANDERA?! 	Bakismongo	2013-04-22 21:55:16.689335	2013-04-22 21:55:16.689335	\N	\N	\N	\N	\N
+121	Ska jag ta alla på en gång? 	Fisk	2013-03-21 04:34:58.063511	2013-08-24 08:09:23.750164	\N	\N	\N	\N	\N
+140	Mina boobs har typ varit en tallrik för chips	Anna Boo Boo	2013-05-10 01:59:48.134425	2013-05-10 01:59:48.134425	\N	\N	\N	\N	\N
+139	Men om det är en... HELT gigantisk... aluminiumkub?	Akz, om vad som händer när ett föremål som är större och mer massivt än ett svart hål kolliderar med det sistnämnda..	2013-05-09 22:13:01.113515	2013-05-11 10:23:18.225444	\N	\N	\N	\N	\N
+141	Mjukporr? Vadå typ som barnporr eller?	Schmangez	2013-05-20 16:57:51.754466	2013-05-20 16:57:51.754466	\N	\N	\N	\N	\N
+142	-Vad var det vi pratade om? -Ringalinaling. Jag vet inte. Det var säkert det.	Arvz & Emil & Mange	2013-05-20 17:00:02.295234	2013-05-20 17:00:02.295234	\N	\N	\N	\N	\N
+143	Du, det ser ut som att någon har sugit där va. 	Jespers pappa om avis hals (efter ag) 	2013-05-22 16:38:04.147846	2013-05-22 16:38:04.147846	\N	\N	\N	\N	\N
+144	"Spänn inte skinkorna, Charlie!" - "Får du inte plats då?" 	Denise och Charlie 	2013-05-22 23:43:26.085567	2013-05-22 23:43:26.085567	\N	\N	\N	\N	\N
+145	Alltså jag planerade inte ville, vulva, vulvo.	Spanx	2013-05-25 20:03:06.862795	2013-05-25 20:03:06.862795	\N	\N	\N	\N	\N
+146	Alltså det här är ju en trombon.	Brattzie om vinden	2013-05-27 14:20:09.989441	2013-05-27 14:20:09.989441	\N	\N	\N	\N	\N
+147	Denise, jag blir hungrig av att lukta på ditt skrev just nu	Aviz	2013-05-27 18:06:02.881713	2013-05-27 18:06:02.881713	\N	\N	\N	\N	\N
+148	Jag fick inte in hela i munnen men det var nice ändå. 	Karolina ring - MKM 	2013-05-29 21:16:48.939989	2013-05-29 21:16:48.939989	\N	\N	\N	\N	\N
+149	Skaka om korven lite	Pucci till Mange	2013-06-03 17:07:12.306628	2013-06-03 17:07:12.306628	\N	\N	\N	\N	\N
+150	Ekom: "Använd skydd" Vekom: "Ekom säger; Ta betalt"	Till Annas lillasyster när hon träffar sin pojkvän	2013-06-03 21:41:26.235711	2013-06-03 21:43:33.62763	\N	\N	\N	\N	\N
+151	Anna kommer, och sperma bara rinner ut ur penisen! Den sprutar inte ens!	Emil, om Annas penis	2013-06-03 22:44:10.198404	2013-06-03 22:44:10.198404	\N	\N	\N	\N	\N
+152	Arvin, du är keff. Du är den keffa killen i DKM som bara råkade vara där.	Anna, medan Arvin tar hand om henne när hon har svimmat ett antal gånger under kvällen.	2013-06-06 18:10:43.706783	2013-06-06 18:10:43.706783	\N	\N	\N	\N	\N
+185	Hur är man bebis osexuellt?	Bratzie	2013-06-16 15:41:56.066685	2013-06-16 15:41:56.066685	\N	\N	\N	\N	\N
+186	Jäklar vilken snygg bild, jävlar vilken kropp, jag blir typ imponerad	Anna när hon kollar bilder på sig själv på Facebook	2013-06-19 22:13:28.780889	2013-06-19 22:13:28.780889	\N	\N	\N	\N	\N
+187	äru på nå såndär tjäna pengar ställe du lr	Daniels	2013-07-01 14:26:41.501681	2013-07-01 14:26:41.501681	\N	\N	\N	\N	\N
+188	Plöj henne bara! Nallebjörnsstyle!	Denise, till Chowdhury	2013-07-06 19:19:56.364459	2013-07-06 19:19:56.364459	\N	\N	\N	\N	\N
+189	En liten puss kanske?!	Mangz	2013-07-06 19:20:06.613524	2013-07-06 19:20:06.613524	\N	\N	\N	\N	\N
+190	Man kan inte spendera all tid med flickvännen, man måste ju ha kul också.	Avis	2013-07-06 19:20:18.201092	2013-07-06 19:20:18.201092	\N	\N	\N	\N	\N
+191	Det finns sexuella trakasserier, sen finns det gentjänster!	Pudgi pls	2013-07-06 19:20:31.006842	2013-07-06 19:20:31.006842	\N	\N	\N	\N	\N
+192	Thats a lawsuit!	Pucci	2013-07-06 19:20:56.745992	2013-07-06 19:20:56.745992	\N	\N	\N	\N	\N
+193	Jag har ju sagt att jag inte tycker om tjejer!	Silly	2013-07-06 19:21:11.375897	2013-07-06 19:21:11.375897	\N	\N	\N	\N	\N
+194	Det är min dag idag!	Silly	2013-07-06 19:21:22.343038	2013-07-06 19:21:22.343038	\N	\N	\N	\N	\N
+195	Jag bajsar som en ängel!	McNajs	2013-07-06 19:21:35.620182	2013-07-06 19:21:35.620182	\N	\N	\N	\N	\N
+196	Fest i E-Ljusgården?	Bratt	2013-07-06 19:22:31.813503	2013-07-06 19:22:31.813503	\N	\N	\N	\N	\N
+197	Fan har du apelsinjuice där, näej det var en bok!	Sebastian "one step at a time" Magnusson	2013-07-08 01:29:43.759928	2013-07-08 01:30:27.047599	\N	\N	\N	\N	\N
+198	Jag har inte gått en dag i mitt liv utan att nån dinglat en frestelse i mitt ansikte.	D-niz	2013-07-13 14:16:23.421651	2013-07-13 14:16:23.421651	\N	\N	\N	\N	\N
+199	Det må va trevligt, men jag är hellre i en park och super mig skitfull	Bakiselin <>	2013-07-13 18:54:52.163015	2013-07-13 18:54:52.163015	\N	\N	\N	\N	\N
+200	Du är en sån manpussy	Bratt till Sara	2013-07-23 07:09:23.899895	2013-07-23 07:09:23.899895	\N	\N	\N	\N	\N
+201	Folk i förorten vänder sig om och stirrar på mig för att jag är så blek...	Sophie	2013-07-26 11:31:46.118114	2013-07-26 11:31:46.118114	\N	\N	\N	\N	\N
+202	Alltså inte för att vara sån, men jag har ju känt henne längre än hennes man har gjort. Jag har ju legat med Agnes 50m från där hon och hennes ex låg på en strand.	Pucci, på tjejen i frågas bröllop	2013-08-10 21:35:03.174418	2013-08-10 21:35:03.174418	\N	\N	\N	\N	\N
+15	Jag måste köra en Silly, kommer snart!	Emil, som ska spy	2012-11-03 00:31:56.818461	2013-08-24 08:01:12.778717	\N	\N	\N	\N	\N
+203	Definitionen av att vara ihop är om man ligger, sedan sover en natt ihop utan att ligga, och sedan ligger igen.	Chippen	2013-09-08 19:37:50.071413	2013-09-08 19:37:50.071413	\N	\N	\N	\N	\N
+204	Arabiska våren? Vad är ens det för något?	Sparkles	2013-09-09 16:28:11.672952	2013-09-09 16:28:11.672952	\N	\N	\N	\N	\N
+205	"Arabiska våren." "Vad?"	Anna, sedan visar det sig att Elin inte vet heller	2013-09-09 16:28:44.783768	2013-09-09 16:28:44.783768	\N	\N	\N	\N	\N
+206	Jag är helt sönderkörd	Anna (av Robin(s kuk(jk)))	2013-09-12 14:53:12.650654	2013-09-12 14:53:12.650654	\N	\N	\N	\N	\N
+207	Vi har sex, fast med kläder	Anna till Emil	2013-09-12 14:59:37.506083	2013-09-12 14:59:37.506083	\N	\N	\N	\N	\N
+208	Jag var så fokuserad på min öl, så jag hörde inte.	Emil	2013-09-12 15:00:15.153075	2013-09-12 15:00:15.153075	\N	\N	\N	\N	\N
+209	Jag ska sätta deadline i år på att börja alla labbar tre dagar innan.	Arvin (Har varit borta första tre veckorna av skolan)	2013-09-12 15:01:24.285201	2013-09-12 15:01:24.285201	\N	\N	\N	\N	\N
+210	Jag tycker fundamentalt illa om folk jag inte känner	Axel	2013-09-13 21:14:07.537809	2013-09-13 21:14:07.537809	\N	\N	\N	\N	\N
+211	Det är som han programledaren för 'Sooommar, sommar och sol!', han gör ju lite hajkiga grejer.	Sushi	2013-09-16 16:26:03.351589	2013-09-16 16:26:03.351589	\N	\N	\N	\N	\N
+212	I can't stop touching myself	Sara, viskandes till Emil på toaletten	2013-09-28 16:06:21.1084	2013-09-28 16:06:21.1084	\N	\N	\N	\N	\N
+213	Kom och knulla mig! Eller nej, jag menade kom och krama mig!	Iron man Anna	2013-10-17 13:30:49.425639	2013-10-17 13:30:49.425639	\N	\N	\N	\N	\N
+214	Ska vi knulla? Min mamma brukar säga det ibland.	Anna	2013-10-17 13:32:23.707381	2013-10-17 13:32:23.707381	\N	\N	\N	\N	\N
+215	"Vad pratar vi om?" "ALLT!"	Axel och Sebbe	2013-10-21 16:52:03.986879	2013-10-21 16:52:03.986879	\N	\N	\N	\N	\N
+218			2013-10-22 18:00:47.663925	2013-10-22 18:00:47.663925	Axel va lite trött	image.jpg	image/jpeg	2040300	2013-10-22 18:00:45.452583
+219			2013-10-22 20:55:18.850213	2013-10-22 20:55:18.850213	Anna försöker poppa en ballong!	1399352_171216856416947_715207652_o.jpg	image/jpeg	227075	2013-10-22 20:55:17.682536
+220	Ja, men det var ju vi tre som gick STAD då. Och Elin.	Anna	2013-10-22 21:13:10.143734	2013-10-22 21:13:10.143734		de_tre_vannerna_och_elin.jpg	image/jpeg	59357	2013-10-22 21:13:09.957257
+223	Min upplevelse av förloppet är att jag sprutar på mig själv!	Avis	2013-10-25 19:45:44.318668	2013-10-25 19:45:44.318668		\N	\N	\N	\N
+222	Jag är kroniskt gravid	Sara	2013-10-25 19:43:57.117141	2013-10-25 19:55:57.072127		\N	\N	\N	\N
+225	Jag har svårt att se Axel värna om något. Jag trodde han värnade om dkmare, sedan kissade han på dom. 	Avis	2013-10-31 01:00:10.313712	2013-10-31 01:00:10.313712		\N	\N	\N	\N
+234	Det där ser ju mer ut som en vagina än vad min gjorde! 	Felin 	2013-11-11 21:54:02.603163	2013-11-11 21:54:02.603163	Om papperskorgen	\N	\N	\N	\N
+227	Vadå 14, ni är ju 8 och vi är 6?	Sandra	2013-11-01 20:10:31.326223	2013-11-01 20:14:35.687577	Insupwt	\N	\N	\N	\N
+228	Jag har en ficka på min frack... Vänta, jag har ingen frack! 	Anna	2013-11-01 20:42:30.786035	2013-11-01 20:42:30.786035	Insupet 	\N	\N	\N	\N
+229	Jag må komma sent. Men det blir alltid scrambled eggd!	Chowtime	2013-11-02 10:50:33.407663	2013-11-02 10:50:33.407663		\N	\N	\N	\N
+230		BakismonGO 2.0	2013-11-02 12:11:35.91082	2013-11-02 12:11:35.91082	Dagen efter 	IMG_20131102_131004.jpg	image/jpeg	2216497	2013-11-02 12:11:32.930255
+231	Toamannen!		2013-11-02 12:19:49.495664	2013-11-02 12:19:49.495664		image.jpg	image/jpeg	1706519	2013-11-02 12:19:46.993124
+232	Vad fan håller de på med där borta?	Elin	2013-11-02 12:44:17.145149	2013-11-02 12:44:17.145149	Om Iran	\N	\N	\N	\N
+233	Kan du kolla upp schemat? Visst heter en Mattias?	Mange	2013-11-04 12:15:17.296845	2013-11-04 12:15:34.958349	Insupet, innan kött lär sig sjunga	\N	\N	\N	\N
+235	En ekom och en vice ekom är nog den bästa idén jag haft i hela mitt liv, och jag tror det var Axels idé	Clubmaster Mange	2013-11-14 15:24:00.659137	2013-11-14 15:24:00.659137		\N	\N	\N	\N
+236	Aperol, Prosecco och Tonic, det mest klassiska du kan dricka!	Adam	2013-11-19 22:24:37.502062	2013-11-19 22:24:37.502062	Annas födelsedagsfest	\N	\N	\N	\N
+237	Jag äter viss typ av kyckling och oxfilé.	Sara	2013-11-20 00:52:31.471141	2013-11-20 00:53:44.212812	Annas b-day	\N	\N	\N	\N
+238	Det är lätt jag som är chillarN	Annabooboo	2013-11-24 21:50:25.911001	2013-11-24 21:50:25.911001		\N	\N	\N	\N
+239	It's not what you think it is	Shayan	2013-11-25 16:13:11.223961	2013-11-25 16:13:11.223961	Shayans nattduksbord	image.jpg	image/jpeg	1765395	2013-11-25 16:13:05.760592
+240	Min pojkvän är trevlig när han är full i alla fall	Eva Melin	2013-12-01 15:46:17.795479	2013-12-01 15:46:17.795479		\N	\N	\N	\N
+241	"Det lär ju inte vara så svårt att få med sig svamp på rymdfärjan" "ja, vafan, lägg det i en sallad eller något"	Akz och Wilczek	2013-12-04 00:33:51.030058	2013-12-04 00:34:26.680516	får man ha matsäck till rymden?	\N	\N	\N	\N
+243	Han är jättetrevlig och så, men jag vill inte ha hans kuk i min mun	Anna	2013-12-08 22:18:41.204555	2013-12-08 22:18:53.798042	Charlies födelsedag	\N	\N	\N	\N
+242	Jag har ett konto som subbar på typ alla porr subreddits, och då menar jag inte earthporn	Barkis	2013-12-07 23:30:44.22412	2013-12-09 17:28:21.16291	hangouts	\N	\N	\N	\N
+244		DJ	2013-12-09 17:29:29.963488	2013-12-09 17:29:29.963488	Årets plumsmärke	Screenshot_2013-12-09_18.28.03.png	image/png	52863	2013-12-09 17:29:28.87163
+245	Fan, jag är aspissnödig, och det är för tidigt för att pissa på rälsen	Patrik	2013-12-16 20:43:04.149244	2013-12-16 20:43:04.149244	Nykter, 21:41 på en måndag	\N	\N	\N	\N
+246	Jag äter ju hellre en död groda, än ett nästan barn!	Elin	2014-01-03 19:40:33.985608	2014-01-03 19:40:33.985608	Casually	\N	\N	\N	\N
+247	nice	Shayan	2014-01-07 00:19:50.554021	2014-01-07 00:19:50.554021	Efter att ha fått svar på frågan om the carpet matches the drapes	\N	\N	\N	\N
+248	När det är så många infomar, så blir det ju inte så mycket infom per skalle...	Aksel	2014-01-11 03:44:04.695185	2014-01-11 03:44:04.695185		\N	\N	\N	\N
+249	Skrämmande att veta att ditt huvud kan krossas som en vattenmelon när som helst	Mattis	2014-01-11 22:29:54.591163	2014-01-11 22:29:54.591163	Om att dejta hästtjejer	\N	\N	\N	\N
+250	Jag förstår. Tänk hur de som har astma har det!	Anna	2014-01-14 21:11:57.163769	2014-01-14 21:11:57.163769	medan hon andas i världens längsta sugrör	\N	\N	\N	\N
+251	"Om du fick välja vem som helst i världen, vem skulle du välja då?" "Dig, Robin" "Jag skulle välja Seal. För då skulle jag bli bukis med Heidi Klum"	Sparkz och Anna	2014-01-24 22:02:24.580326	2014-01-24 22:02:24.580326	Spritkväll hos Sparkie	\N	\N	\N	\N
+252	Jag har aldrig ens varit i koma	Adam	2014-01-27 21:26:30.637068	2014-01-27 21:26:46.556061	Om sin diabetes	\N	\N	\N	\N
+253	"Det kliar inuti mig" "Jag kan klia!"	Arvz och Sparkz	2014-01-29 05:41:05.173652	2014-01-29 05:41:05.173652	Breakfast at Tiffany's	\N	\N	\N	\N
+254	Det var ju du som sabbade allt genom att sätta dig i mitt knä, när jag försöker rita.	Pucci	2014-02-02 14:25:24.067547	2014-02-02 14:25:48.72246	Axels dröm om Valborg/Åre	\N	\N	\N	\N
+255	Det är som highway to hell fast highway to straight forward!	Lils	2014-02-03 09:16:36.123321	2014-02-03 09:16:36.123321	Om sitt liv	\N	\N	\N	\N
+256	- Jag behöver en present till min Pappa. - En pocket pussy? - Han har ju min mamma...	Denise, Spark	2014-02-03 09:35:16.643669	2014-02-03 09:35:58.720009	Denise pappa fyller år snart!	\N	\N	\N	\N
+257	Ska vi köra Fuck, Marry, Murder?" "Du menar Kill, Barry, Mang?"	Arvz och Akz	2014-02-04 09:39:54.439757	2014-02-04 09:39:54.439757	Framför medias funktionärstavla	\N	\N	\N	\N
+258	Det är dance. Det är som dans, fast international!	Mange	2014-02-10 20:27:40.388325	2014-02-10 20:27:40.388325	På blotet	\N	\N	\N	\N
+259	ELIIIIIINNNNNN!!!!!	emil	2014-02-10 20:59:04.966915	2014-02-10 20:59:04.966915	blotet	\N	\N	\N	\N
+260			2014-02-10 21:00:03.761033	2014-02-10 21:00:03.761033		Screenshot_2014-02-10-21-57-49.png	image/png	390018	2014-02-10 21:00:01.65382
+261	Jag kan gå fram till någon och säga "fan vad snygg du är", men jag menar det inte.	Adam	2014-02-14 18:52:27.002514	2014-02-14 18:52:27.002514	spritis	\N	\N	\N	\N
+262	Jag har dragit i många fittor i mitt liv, det har varit många segel 	Arvin	2014-02-24 23:32:46.663382	2014-02-24 23:32:46.663382	Nivå 22 med MKM	1393284737870.jpg	image/jpeg	1693383	2014-02-24 23:32:41.743678
+263	Jag har aldrig varit på en konsert med typ ljus	Sara	2014-02-28 20:00:12.640924	2014-02-28 23:21:50.902269	Spotify innan Avicii	\N	\N	\N	\N
+264	Alltså, vart fan är bergshamra? Alla ba "bergshamra hit och bergshamra dit"	Lils	2014-03-03 18:23:56.123568	2014-03-03 18:23:56.123568		\N	\N	\N	\N
+265	"vad är regeln, genom två plus fem?" "plus sju!" "plus fem, vi är i sverige!"	Pucci	2014-03-03 21:54:22.245354	2014-03-03 21:54:22.245354	angående att ligga med minderåriga	\N	\N	\N	\N
+266	Jag har pokémon!	Adam	2014-03-08 20:19:18.877894	2014-03-08 20:19:18.877894	Adam när han försöker vara ungdomlig 	\N	\N	\N	\N
+267	jag spydde och hade sex	Silly	2014-03-08 20:31:40.6986	2014-03-08 20:31:40.6986	Silly om din tid i DKM 	\N	\N	\N	\N
+268	Vi är vackra!	Nisse	2014-03-10 18:44:28.358624	2014-03-10 18:44:28.358624	Cliffmiddagen	20140308_220947.jpg	image/jpeg	1965681	2014-03-10 18:44:25.2138
+269	"Fan jävla gramatik-nazi"	Emil	2014-03-17 12:43:10.259099	2014-03-17 12:43:10.259099	Försöker prata med sin telefon	\N	\N	\N	\N
+270		Anna	2014-03-22 18:40:53.007358	2014-03-22 18:40:53.007358	Mästarfester hos Robin	DSC_0063.JPG	image/jpeg	1527546	2014-03-22 18:40:49.599413
+271	O, heliga fett	Älvsjö	2014-04-04 23:58:46.612031	2014-04-05 00:01:30.624569	Charlies nya smeknamn	Snapchat-20140404115759.jpg	image/jpeg	129469	2014-04-05 00:01:29.023843
+272	Jag ska inte frysa in några fler katter! 	Silly 	2014-04-12 23:50:17.157168	2014-04-12 23:50:17.157168	THS Coctailparty 	\N	\N	\N	\N
+273	Förlåt, men min penis fick plats väldigt bra mellan dina bröst!	Bratzie	2014-04-13 01:56:02.11572	2014-04-13 01:56:02.11572		\N	\N	\N	\N
+274	Ah, jo, för jag hade sex i huvudet	Mange	2014-04-22 11:58:23.346036	2014-04-22 11:58:23.346036	Om klockan	\N	\N	\N	\N
+275	Kan du ge mig i mitt ansikte? Eller jag menar i min mun	Elin	2014-05-07 16:14:46.331385	2014-05-07 16:14:46.331385	Öltältet quarnevalen	\N	\N	\N	\N
+276	Elin hatar uteliggare#tyvärr+ihpone	Elin 	2014-05-07 21:05:19.568461	2014-05-07 21:05:19.568461	SSCO + SM-i-feSt	\N	\N	\N	\N
+277	Det här med att tjackrunka ändå	Patte	2014-05-16 07:43:18.296007	2014-05-16 07:43:18.296007	Spritis, mitt i en konvo-paus	\N	\N	\N	\N
+278	Sandra, bli aldrig kär!	Hannanybl	2014-05-21 19:37:56.996319	2014-05-21 19:37:56.996319		\N	\N	\N	\N
+279			2014-08-15 18:30:25.985451	2014-08-15 18:30:25.985451		IMG_289769673790201.jpeg	image/jpeg	32371	2014-08-15 18:30:24.800214
+280	Alla hatar mig fast jag är skön	Snygg-Martin	2014-11-30 12:15:23.594675	2014-11-30 12:15:23.594675	Punschbrunchen 	\N	\N	\N	\N
+281	Jag kan ju inte svälja på samma gång! 	Elin	2014-11-30 14:47:25.978127	2014-11-30 14:47:25.978127	Bättre utan	\N	\N	\N	\N
+283	Om det är slut på platser i bilen nu, då blir det folkmord	Aron	2014-12-05 22:19:21.529975	2014-12-05 22:19:21.529975	Aron ville verkligen hem från djulmiddags-preppet	\N	\N	\N	\N
+284	Jag gick runt och tog folk på rumpan. Speciellt tjejer	Nils	2014-12-06 12:18:41.482088	2014-12-06 12:18:41.482088	Nils pratar om sin ungdom	\N	\N	\N	\N
+285	vi måste få honom att sära på benen lite	Klubbvig	2014-12-06 22:41:58.93353	2014-12-06 23:27:18.624479	om tomten	\N	\N	\N	\N
+287	Om jag ska ta kål på mig då är det nån stackars sate som ska dra nitlotten och städa upp efter mig	Patte P	2014-12-07 06:09:32.631295	2014-12-07 06:09:32.631295	Om självmord	\N	\N	\N	\N
+288	asså den har ett slemmigt ytlager men är hård innuti	Bangnes	2014-12-08 10:24:11.078436	2014-12-08 10:24:11.078436	plugg i meta??	\N	\N	\N	\N
+290	Man kan inte ersätta en elefant!	Amir	2014-12-12 19:06:28.863836	2014-12-12 19:06:28.863836	#shayan21	\N	\N	\N	\N
+291	Har du varit otrogen mot mig Aron?!	Klubbvig	2014-12-15 19:40:21.136752	2014-12-15 19:40:21.136752	Om deras fakeförhållande	\N	\N	\N	\N
+289	Du vet ju... Du var ju där... Nej juste du var aspackad	Jonas	2014-12-08 18:17:46.591788	2014-12-16 14:21:17.852867	Om Shayan på mottagningstacket	\N	\N	\N	\N
+282	Jag tycker det känns som att äta en tå typ	Nils	2014-12-05 20:36:09.204348	2014-12-16 14:22:54.20811	Om skolmatspotatis	\N	\N	\N	\N
+286	Man håller väl på i 12 timmar? Med runkandet alltså	Patrik	2014-12-07 03:13:31.581666	2014-12-16 14:22:15.730786	Spritis dJul efterfest (Om tjack)	\N	\N	\N	\N
+293	Vi var på bio, den gången hände inte så mycket. Eller ja, jag åt 5 cheeseburgare. 	Ax	2014-12-18 03:56:50.076935	2014-12-18 03:56:50.076935	Axel om en dejt på gymnasiet	\N	\N	\N	\N
+294	Jäger i en Sprite-flaska på komm-lektionen, inte min definition av livsnjutare	Sparks	2014-12-19 18:24:42.855564	2014-12-19 18:24:42.855564	Om Hedvig	\N	\N	\N	\N
+295	stig helmer haffar ju fan varje gång han går utanför dörren	Patte P	2014-12-27 22:39:34.252489	2014-12-27 22:40:01.836354	teach me your ways	\N	\N	\N	\N
+296	Varför kom det upp en liten clown och en häst med rosa afro?	Patte	2014-12-29 16:25:15.532016	2014-12-29 16:25:15.532016		\N	\N	\N	\N
+297	Det är mina hipstervänner. Jag känner dem via Agnes.	Braron	2015-01-01 05:30:04.368439	2015-01-01 05:30:04.368439	Nyårsafton, om sina vänner som varit på besök.	\N	\N	\N	\N
+298	Jag blev lite sur efter cachelabben, så jag kollade upp hans adress	Pudgi pls	2015-01-02 19:27:40.190298	2015-01-02 19:28:39.862438	dtek-Fredrik bor i Hägersten.	\N	\N	\N	\N
+299	Ja, han är ju lite knepig...	Johan, NLG boss man	2015-01-02 20:18:01.970257	2015-01-02 20:18:01.970257	Om James Huang	\N	\N	\N	\N
+301	Ekonomi är inte min grej	KÖD	2015-01-07 17:35:07.119816	2015-01-07 17:35:07.119816	Shayan Effati, mottagningsansvarig 2015	\N	\N	\N	\N
+302	"Matteus, ska du på toa?" – "Aaah" – "Kom så får du en kram"	Indiana	2015-01-08 19:18:27.419962	2015-01-08 19:18:27.419962	Jonas och Matteus imiterar tjejer	\N	\N	\N	\N
+292	Är på toa. Tar gärna punsch	Ax	2014-12-18 02:25:46.058136	2015-01-08 19:19:53.07958	Axel smsar från toaletten	\N	\N	\N	\N
+303	Jag hatar tentor där man måste lära sig saker!	Aron	2015-01-09 08:43:05.154078	2015-01-09 08:43:05.154078		\N	\N	\N	\N
+304	Jag och Flovén satt hela festen och swipeade lite brudar.	PatteP	2015-01-12 18:00:33.038001	2015-01-12 18:00:33.038001	Om sin tinder-erfarenhet	\N	\N	\N	\N
+305	Agnes, har du en stavmixer? Jag kan köra den!	Chow-Chow	2015-01-14 19:49:46.804323	2015-01-15 13:46:38.523409	Man får köra heavy machinery även om man är full	\N	\N	\N	\N
+306	Farbror Shayan will be out there, spreading seeds. Hide yo kids, bring yo wives.	Farbror Shayan "Gröna fingrar" Effati	2015-01-16 12:27:55.27427	2015-01-16 12:27:55.27427		\N	\N	\N	\N
+307	Hur många är vi i DKM? 12?	Agnes	2015-01-17 16:21:08.674762	2015-01-17 16:21:08.674762		\N	\N	\N	\N
+308	Jag har aldrig varit så full att jag har spytt på ett konstigt ställe. Eller jo, det har jag fan	Nille	2015-01-17 18:49:06.077509	2015-01-17 18:49:06.077509		\N	\N	\N	\N
+309	Vi borde köpa koks och sprit	StureP	2015-01-19 17:02:12.222991	2015-01-19 17:02:12.222991	Under en paus i mötet	\N	\N	\N	\N
+330	Summan är inte 0 kr	Fitt-Mage	2015-02-23 20:56:02.697474	2015-02-23 20:56:02.697474		\N	\N	\N	\N
+310	Alltid ha en kondom på foten eller aldrig ha en kondom på kuken?	Henry & Aron	2015-01-22 20:17:58.82243	2015-01-23 21:59:46.557415	dÅrebussen	\N	\N	\N	\N
+311	Det är som att säga att ens egen mamma är en MILF..	Sandra	2015-01-24 20:54:45.064501	2015-01-24 20:54:45.064501	Om att Indiana Jonas har hävdat att han själv är en player	\N	\N	\N	\N
+312	Det enda man ville var att festa mycket och ha sex hela tiden	bAgnes	2015-01-24 22:03:01.195149	2015-01-24 22:03:01.195149	bAgnes eller sex-agnes?	\N	\N	\N	\N
+313	Det ser inte ut som spermafläckar, pls	Sarah	2015-01-30 20:01:15.882427	2015-01-30 20:01:15.882427	Om sin toga	\N	\N	\N	\N
+314	"Jag blir nog lite sen"	Nils	2015-01-30 20:11:25.507534	2015-01-30 20:11:46.237154	Every god damm time	\N	\N	\N	\N
+315	Det där är penis-kannan jag sköljer min näsa med varje dag	wtfnes	2015-01-30 20:27:38.713327	2015-01-30 20:27:38.713327	Cliff-festen	\N	\N	\N	\N
+316	Man vill ju bara dra pungen över din skalle!	Pucci	2015-01-31 00:18:02.461977	2015-01-31 00:18:02.461977	Pucci om Shappes nyrakade skalle	\N	\N	\N	\N
+317	Det är säkert väldigt giftigt men det går bra	Robin, vår klubbmästare <>	2015-02-02 17:47:22.499563	2015-02-02 23:17:15.308731	Angående att han tar antagligen alldeles för mycket medel i diskmaskinen	\N	\N	\N	\N
+318	Jag kände att det var nånting som tryckte mot mitt anus	SHA Poopi	2015-02-07 15:27:04.061135	2015-02-07 15:28:14.416707	Nils nyckelknippa	\N	\N	\N	\N
+319	Jag är lite som Ernst Kirchsteiger 	Aron	2015-02-09 23:13:06.236301	2015-02-09 23:13:06.236301	sjukt stolt	\N	\N	\N	\N
+320	Jag älskar hur ni beter er som att finns någon sorts universella Yahtzee-regler woven into the fabric of space	Arvzman	2015-02-10 13:54:29.569713	2015-02-10 13:54:29.569713	Pucci & Per gör kexjobb	\N	\N	\N	\N
+338	"Näääää... Onödig kaloriförlust"	Tjockis-Jonas	2015-03-12 10:14:12.79313	2015-03-12 10:14:12.79313	När Aron sa att han kan ställa upp borden om han vill ha dem uppe	\N	\N	\N	\N
+321	som att gå in i en grossisthandlare specialiserad på frön. // som om Plantagen öppnade ett eget köpcentrum, med 10 Plantagen	gröna fingrar	2015-02-11 10:43:36.182328	2015-02-11 10:44:13.366585	om sophiahemmet	\N	\N	\N	\N
+323	Alltså Hedvig, den här var inte äcklig... eller jo	Jenna Jameson	2015-02-15 18:49:05.151716	2015-02-15 18:49:05.151716	Drinkprovningen	\N	\N	\N	\N
+324	Ofta ingen har gissat på Double Penetration Rape	Fitt-Adam	2015-02-16 20:41:02.30023	2015-02-16 20:41:02.30023	DPR	\N	\N	\N	\N
+325	Jaså var det en länk? Jag trodde bara det var blå text.	Sparks	2015-02-17 18:20:35.312119	2015-02-17 18:20:35.312119	Försöker boka Osqvik	\N	\N	\N	\N
+326	Vill du slå min kokosnöt? INTE? Förlåt...	Klubbvig	2015-02-18 13:27:06.677205	2015-02-18 13:27:06.677205	Förfest DKM på zemeztr	\N	\N	\N	\N
+328	så lite lakrits slash anis som möjligt	Patte beställer shots	2015-02-18 15:08:32.491033	2015-02-18 15:08:32.491033	Så 9 vanliga och en patte?	\N	\N	\N	\N
+329	Jag blev uppraggad av väldigt många prostituerade	Jonas	2015-02-21 19:36:26.171007	2015-02-23 20:56:34.356186	Om sin "liggresa"	\N	\N	\N	\N
+331	Jag är van vid stora saker i munnen	Adam	2015-02-25 23:36:50.436713	2015-02-25 23:37:13.233494		\N	\N	\N	\N
+333	Det är aldrig ett fel tillfälle att sära på benen!	Patte	2015-02-27 19:02:07.082811	2015-02-27 19:02:27.118851	Om att det är dåligt att sära på benen när någon annan vill få plats i soffan bredvid honom	\N	\N	\N	\N
+335	Vad har jag gjort för att förtjäna det här?	Hedvig	2015-03-04 18:12:13.592352	2015-03-04 18:12:13.592352	Om Hedvigs och Arons "hemliga" fejk-förhållande	\N	\N	\N	\N
+336	Jag brydde mig inte ens om mitt utseende. Jag plattade inte ens håret!	vAinDAM	2015-03-06 19:02:05.235377	2015-03-06 19:03:33.383192		\N	\N	\N	\N
+337	Jag visar allt, och jag trivs bra med det!	Jennalicious	2015-03-09 14:17:57.65512	2015-03-09 14:17:57.65512	Out of context	\N	\N	\N	\N
+339	VafAAAAn jag kommer sätta dig på ett tåg till Jokkasjärvi?!?!?	Jonas	2015-03-12 14:38:20.68912	2015-03-12 14:38:20.68912	När Adam hade åsikter om vilka tåg han tittade på inför Dömd	\N	\N	\N	\N
+340	Vill du bli barstoppad?! För I got the power!	Jonas till Matteus	2015-03-12 14:39:00.740863	2015-03-12 14:39:00.740863	När han frågade något om tåget till Linköping/vad han gjorde.	\N	\N	\N	\N
+341	Våra rumpor kompletterar varandra!	Hedvig	2015-03-15 03:09:41.95843	2015-03-16 02:01:27.749679	Nils och Lubb i perfekt symbios på efterfest #inteskedmennästan	\N	\N	\N	\N
+334	Orelaterad fråga men har någon tandkräm och är på mdi föreläsningen? 	Hedda	2015-03-02 12:21:29.265383	2015-03-16 02:04:25.459458	Random statement @MDI-föreläsning	\N	\N	\N	\N
+332	Man kan ju flörta med dem!	Klubbvig	2015-02-26 16:17:06.713401	2015-03-16 02:05:43.119046	STAD-utbildning, Hur hantera konflikter med fyllon när man står bakom baren.	\N	\N	\N	\N
+327	Jag trodde inte det skulle vara så klibbigt.	Jenna	2015-02-18 13:47:48.78817	2015-03-16 02:06:42.034578	Out of context	\N	\N	\N	\N
+342	Som att ha en hund som kan prata!	Sprkls om Aron	2015-03-27 08:48:15.218709	2015-03-27 08:48:15.218709	DÖMD, Aron sover i soffan och har stenkoll på alla som gått förbi	\N	\N	\N	\N
+343	Jag kommer ihåg när det var en grej att man intr kunde svälja för att saker var för stora.	sväljvig	2015-03-28 12:49:40.707038	2015-03-28 12:49:40.707038	nä (DÖMD)	\N	\N	\N	\N
+344	Jag tror det är jobbigare när det är mycket hår att få in den rätt	Slappe	2015-03-28 13:29:37.106561	2015-03-28 13:29:37.106561	dömd, nuff said	\N	\N	\N	\N
+345	Tänk dig mig och en kuk bara	Adam "jag hittar hem" Denlert 	2015-03-28 20:14:02.158916	2015-03-28 20:14:02.158916	charader på fylleryd	\N	\N	\N	\N
+382	Som läkarna säger: saker som är större än din armbåge hör inte hemma i ditt öra	Encyklopedia Nilsia	2015-05-16 20:01:02.895528	2015-05-16 20:01:02.895528	Eargasm-diskussion (och om tops)	\N	\N	\N	\N
+346	Hennes mussla är definitivt vidöppen 	Jonathan Musselöppnaren Berglind	2015-03-29 12:57:14.293055	2015-03-29 14:33:16.941442	om en väldigt kåt och lättklädd tindertjej 	\N	\N	\N	\N
+347	Jag brukar ta en shot innan jobbintervjuer för att inte vara nervös.	Shotvig	2015-03-30 17:42:58.081227	2015-03-30 17:42:58.081227	Inför drifterintervju	\N	\N	\N	\N
+348	Alla sorger går att dränka	Slappe	2015-04-05 18:58:38.655899	2015-04-05 19:01:31.348504	Försöker muntra upp ledsna tjejer	\N	\N	\N	\N
+349	"När jag var ung..."	Nils	2015-04-07 18:39:32.172766	2015-04-07 18:39:32.172766		\N	\N	\N	\N
+350	Fleeceväst passar fan med allt!	Nils	2015-04-11 23:44:59.414035	2015-04-11 23:44:59.414035	Alltid	\N	\N	\N	\N
+351	"Nämn bara en vokal." "K?"	Sparkles	2015-04-13 16:15:07.299792	2015-04-13 18:15:01.228383	Försöker komma på en vokal på veckans persiska.	\N	\N	\N	\N
+352	Vad är porr egentligen? Man öppnar sin själ!	Sexy Nils	2015-04-13 18:14:46.09587	2015-04-13 18:16:55.692676	Måndagsmut, Jämställdhet	\N	\N	\N	\N
+353	Det är som att komma till den ryska delen av youtube	PutteP	2015-04-13 18:59:45.69396	2015-04-13 18:59:45.69396	Om vegania.net	\N	\N	\N	\N
+354	Det kommer bli vitt mjöl och någons morsa	PutteP	2015-04-17 21:26:07.947276	2015-04-17 21:26:07.947276	Om budgeten till valborgsbussen	\N	\N	\N	\N
+356	Grupp sju låter inte lika bra som grupp sex.	Jenna	2015-04-18 13:07:15.300135	2015-04-18 13:07:33.164899	Plosqvik gruppindelning	\N	\N	\N	\N
+357	Hur många färger finns det ens?	Färgifer	2015-04-24 13:37:10.054644	2015-04-24 13:37:10.054644	Apropå google calendar	\N	\N	\N	\N
+358	Nära skjuter ingen hare, men visst fan skjuter det en elefant!	Slappe	2015-04-25 12:43:47.601803	2015-04-25 12:43:47.601803	Gammalt Slappt ordspråk	\N	\N	\N	\N
+359	Alltså vi måste skjuta saker mer!	Jenna "Columbine" Persson	2015-04-25 18:38:19.251055	2015-04-25 18:38:19.251055	Efter teambuilding med skyttesimulator	\N	\N	\N	\N
+360	Mitt hus ligger typ vid den där tallen.	Smartin	2015-04-26 08:22:11.627608	2015-04-26 08:22:11.627608	Försöker peka ut en specifik tall bland 100 tallar.	\N	\N	\N	\N
+355	Det är det där som är det härliga med sjukdomar	Nils	2015-04-18 13:06:00.999001	2015-04-27 06:27:05.498888	Om hur magkatarr kan utvecklas till magsår	\N	\N	\N	\N
+361	Jag dansade som en rysk robot från framtiden.	Nils "Нйлс" Dahlberg	2015-04-27 16:07:30.331877	2015-04-27 16:07:56.817909	Jämför sin dansstil med Sparkles	\N	\N	\N	\N
+363	Vänta, vänster är hitåt va? *pekar osäkert åt vänster*	Jenna "GPSen" Persson	2015-05-06 13:50:53.230603	2015-05-06 13:52:30.081281	På väg till MO	\N	\N	\N	\N
+364	Patte på Tinder, han kommer bara swipea nej	Agnes "Tinder-gurun" Åman	2015-05-07 00:34:16.88945	2015-05-07 00:34:16.88945	Punsch efter städning	\N	\N	\N	\N
+365	Jag har typ inte fattat grejen med Maskinen	Sandrafasi	2015-05-07 14:25:22.723329	2015-05-07 14:25:22.723329	"Jag lyssnar mest på Magnus Uggla"	\N	\N	\N	\N
+366	9-åringar är ju rätt så pryda...	Mangelicious	2015-05-09 20:41:52.743467	2015-05-09 20:41:52.743467	KMM	\N	\N	\N	\N
+367	Oj, jag råkade säga fel namn. Jag kallade dig för Karin!	Jenna	2015-05-11 14:51:33.928087	2015-05-11 14:51:33.928087	Till Hedvig	\N	\N	\N	\N
+368	Kolla vad indie jag är. Jag skalar morötter med en osthyvel.	Adam "Indie" "Indieam" "Indienlert" Denlert	2015-05-13 14:13:13.624611	2015-05-13 14:13:13.624611	preppa indiepubbbbbbb	\N	\N	\N	\N
+369	Ska vi vänta in de andra? -Neej, vi är fan 2 Köpingar före de andra!	Pucci	2015-05-14 10:40:51.545412	2015-05-14 10:40:51.545412	På väg ner till Öland	\N	\N	\N	\N
+370	alltså jag är ju verkligen inte en sån som gillar att trycka ner kvinnor, men...	Nils Mannen Dahlberg 	2015-05-14 15:18:12.402001	2015-05-14 15:18:12.402001	om sin kvinnosyn	\N	\N	\N	\N
+371	Efter Asien har jag lite svårt med att skilja R och L. 	Fyllejenna	2015-05-14 20:02:45.074199	2015-05-14 20:02:45.074199	#AÖ2015	\N	\N	\N	\N
+372	Alltså jag skulle ja aldrig ge en ko för Elin. Typ två getter och en höna kanske...	PatteP	2015-05-14 22:32:12.63322	2015-05-14 22:32:24.071224	Öland, om vad Elin är värd	\N	\N	\N	\N
+373	Alltså tjejer är ju mindre värda	Om byteshandeln med getter	2015-05-14 22:39:07.257303	2015-05-14 22:39:07.257303	Arvin	\N	\N	\N	\N
+374	Känn min rumpa Shayan! Den är svinkall!	Kallvig	2015-05-15 01:01:52.639365	2015-05-15 01:01:52.639365	AÖ 2015	\N	\N	\N	\N
+375	Jag har aldrig dödat så många zombies som med FaberCastell kulspetspennor	Kritvig "Zombiekiller" Reuterswärd	2015-05-15 01:04:21.250372	2015-05-15 01:04:21.250372	Om sina drömmar vid läggdags på AÖ15	\N	\N	\N	\N
+376	Den där ölen är svinäcklig. Den luktar lik och smakar blod!	Ölnes af Öland	2015-05-15 16:55:27.085771	2015-05-15 16:55:27.085771	Om El Conquistador Session IPA	\N	\N	\N	\N
+377	Han kan inte både äta kakan och äta en till kaka.	Pannkakanish	2015-05-16 10:07:58.90968	2015-05-16 10:07:58.90968	Visdomsord om relationer	\N	\N	\N	\N
+378	Jag hade inte sex igår, men det betyder inte att jag är i en relation. Man har ju sina off-days...	Jonas "Sex-Mask-inen" Isacsson	2015-05-16 13:20:21.916897	2015-05-16 13:20:21.916897	ÖLand	\N	\N	\N	\N
+379	Vägen till alkoholism och allmänt förfall.	Champagnes	2015-05-16 13:26:51.409066	2015-05-16 13:26:51.409066	Om Indana Jonas' nya dryckeslek.	\N	\N	\N	\N
+380	Jag känner mig verkligen som en porrstjärna ibland	Jånas	2015-05-16 16:52:48.550586	2015-05-16 16:52:48.550586	Jonas är ett djur i sängen när han är packad	\N	\N	\N	\N
+381	*Awkard silence* ...är det någon här som haft någon könssjukdom? *another awkward silence*	Sandralicious	2015-05-16 19:38:47.045987	2015-05-16 19:38:47.045987	Trevliga diskussioner på ÖLand	\N	\N	\N	\N
+391	Den går fan till slussen, Yolo. Slussen är vår tids Rom.	Bratzie	2015-05-29 23:27:50.54438	2015-05-29 23:27:50.54438	Bussar i Sthlm	\N	\N	\N	\N
+383	Jag skulle säga att min Lucy är rätt så Juicy!	Sandralicious	2015-05-16 20:15:06.305015	2015-05-17 16:58:22.429614	No context @öl-land	\N	\N	\N	\N
+385	Det är som valborgspubrundan, fast utan pubrundan... och inte på valborg.	Aron "Mr. Logic" Strandberg	2015-05-18 17:54:15.465304	2015-05-18 17:54:15.465304	Om tolvtimmarsfesten	\N	\N	\N	\N
+386	Hahaha aint no lube here just lubbe	Jenna	2015-05-22 18:04:30.3422	2015-05-22 18:04:30.3422	Angående säxi times i Lubbes snåriga kärleksliv	\N	\N	\N	\N
+387	Alltså vi skulle ju kunna bli knarkare om vi ville	Knarkvig	2015-05-22 18:08:16.171113	2015-05-22 18:08:16.171113	Angående om sin framtida tid i Drifveriet, boendes i källaren på Pasta Shadypido	\N	\N	\N	\N
+388	Jag har räknat på det här... *därför kommer det hända hint hint*	Jenna the scientist	2015-05-26 10:42:35.091396	2015-05-26 10:42:35.091396	Angående idag att det är synd att sabba Klubbvigs streak med att träffa haffet varannan kväll.	\N	\N	\N	\N
+389	När jag reser på mig så känner jag ändå att jag druckit en Prosecco. Så det var inte en total waste of time då.	Champagnes	2015-05-29 19:29:39.747098	2015-05-29 19:29:39.747098	Bubbel och jordgubbar i Rålis	\N	\N	\N	\N
+390	Här luktar det fan persisk mamma	PutteP	2015-05-29 21:20:47.180938	2015-05-29 21:20:47.180938	Går in i Shappes morsas rum.	\N	\N	\N	\N
+392	Jag har typ blivit veg!	Jonathan	2015-06-01 10:25:19.251662	2015-06-01 10:25:19.251662	2 minuter efter att ha slukat Arons kebabrester	\N	\N	\N	\N
+384	Dom kom in under Martins kuk	Agnes	2015-05-18 15:40:55.504165	2015-06-01 13:12:23.156724	när DKM skrämde iväg MKM på öland	\N	\N	\N	\N
+393	Amen be honom komma hit och fylla upp din kvot (?)	BANGnes	2015-06-01 13:22:37.259348	2015-06-01 13:22:37.259348	Angående att Hedvig borde fylla sin 40-sekunders kyss-kvot	\N	\N	\N	\N
+394	Halva inne på Silvana Imam Shay? - Hon gillar inte killar. - Könsbyte då, lätt värt!	Adam da Man?	2015-06-01 15:46:18.873496	2015-06-01 15:46:18.873496	Shay blev smekt i håret av Silvana.	\N	\N	\N	\N
+395	Jag prickade i lite bara liksom för att..	Doodlekungen	2015-06-01 16:12:58.346035	2015-06-01 16:12:58.346035	Jonas doodlar	\N	\N	\N	\N
+396	Alla ville uppleva Hedvig Reuterswärd i sängen	Shappeluring	2015-06-02 11:11:48.017133	2015-06-02 11:11:48.017133	Angående att folk snodde Lubbes säng på Öland	\N	\N	\N	\N
+397	Jenna, sära lite på benen här.	Jonas "musselöppnaren" Isacson	2015-06-03 18:25:46.151186	2015-06-03 18:25:46.151186	Ville komma åt DKM-skåpet på orrepurre	\N	\N	\N	\N
+398	Krut luktar så gott!	Jennifer"JaegarN" Persson	2015-06-04 18:25:51.03864	2015-06-04 18:25:51.03864	Skjutglad	\N	\N	\N	\N
+399	Egentligen tycker jag inte om namnet Klas	Sandra	2015-06-05 20:03:47.243082	2015-06-05 20:03:47.243082	Aka Klas-haffaren	\N	\N	\N	\N
+400	Det är sant, jag uppfann kamasutra 	Indiana Guru	2015-06-06 11:53:02.624848	2015-06-06 11:53:02.624848	"kamasutra är min självbiografi"	\N	\N	\N	\N
+401	Det här är en milstolpe i vårt förhållande!	Gosvig	2015-06-06 12:48:21.317214	2015-06-06 12:48:21.317214	Om att fylleragga genom att ta Aron konstigt på ansiktet. Fast nyktert. På dagen. På låtsas.	\N	\N	\N	\N
+402	Måste vi ha tröjorna på? Jag vill visa upp min KROPP!	Jenna J	2015-06-06 14:28:06.887202	2015-06-06 14:28:06.887202	DKM-foto	\N	\N	\N	\N
+403	Kan man runka genom byxfickan?	Fickvig	2015-06-06 16:52:16.557616	2015-06-06 16:52:16.557616	Tentapubsprepp	\N	\N	\N	\N
+432	Vem är du? Vad har du gjort med Adam? Hur gör vi för att döda dig?	Kniv-Söder	2015-10-05 16:35:37.223341	2015-10-05 16:35:37.223341	Adam vill införa ovvekultur till DKM	\N	\N	\N	\N
+405	 Dumplings och en snabbis, bästa lunchrasten någonsin!	Relationsgurun Aron	2015-06-10 11:11:36.785176	2015-06-10 11:11:36.785176	Jonas raggar på dumplingtanten	\N	\N	\N	\N
+406	Varför tittar du på Köpenhamn live (snapchat)? Det kan komma upp tits	Jonnas	2015-06-12 20:09:41.522798	2015-06-12 20:10:34.892739	På väg till sommarfest	\N	\N	\N	\N
+407	Gå ner är bättre än ångvält eller hur?	Raggvig, visar sina dansskilllz	2015-06-12 22:22:15.882988	2015-06-12 22:22:15.882988	Sandras ferreP	\N	\N	\N	\N
+408	Jag har blekt mitt anus. Det var nice. Det är skönt när någon är där och pillar!	PatteP	2015-06-14 16:33:42.457401	2015-06-14 16:33:42.457401	SorreOrre	\N	\N	\N	\N
+409	Gör något porrigt så lägger han märke till dig.	Porrnas	2015-06-15 10:10:26.367361	2015-06-15 10:10:26.367361	till Hedvig för att få kökspojken att se henne. Eller ba generellt (?)	\N	\N	\N	\N
+404	Asså Aron, ditt skrev är liksom HÄR!	Skrevig	2015-06-06 17:36:00.796314	2015-06-15 10:11:30.942572	Vid fotografering av skvallermaffian	\N	\N	\N	\N
+410	DET ÄR SÅ JÄÄÄÄÄVLA ENKELT! 	patteP	2015-06-15 15:04:43.015874	2015-06-15 15:04:43.015874	om allt 	\N	\N	\N	\N
+412	Vad heter han? Han med luggen. Han är en av dom jag hänger med hela tiden. Den sjätte av oss... MICKE!	Jonas	2015-06-27 14:41:33.217161	2015-06-27 14:41:33.217161	Kurrefesten	\N	\N	\N	\N
+411	Jävlar vad jag ska bli diktator	Adam	2015-06-27 11:17:07.437567	2015-06-27 14:41:49.136248	Om att bli klubbmästare 	\N	\N	\N	\N
+413	"Du kan ju knyta kjolen igen" "Jag kan lyfta på den"	Jonas	2015-06-27 18:06:06.160315	2015-06-27 18:06:06.160315	Agnes har långkjol och spelar kubb	\N	\N	\N	\N
+414	Det är molnigt när det regnar!	Captain Obvious aka Hanna	2015-07-25 20:44:59.61032	2015-07-25 20:44:59.61032	@Jennas	\N	\N	\N	\N
+415	Vad heter mellanslag fast i verkligheten?	JennaIRL	2015-07-26 01:03:08.611198	2015-07-26 01:03:08.611198	Space yao	\N	\N	\N	\N
+416	Vad ska niii göra? - Vi ska vara kärleksfuullla!	Jennapoopz	2015-08-09 05:46:18.891451	2015-08-09 05:46:18.891451	Mysvig och Jenna går iväg under Xningen	\N	\N	\N	\N
+417	Känner du hur jag vibrerrrrrar?!	Forkvig	2015-08-10 06:44:01.15297	2015-08-10 06:44:01.15297	Dryhumping som mittensked	\N	\N	\N	\N
+418	Ålder före kön	Pucci	2015-08-21 18:36:34.235203	2015-08-21 18:36:34.235203	Om nØllan, inför mörkerpuben	\N	\N	\N	\N
+419	Pucci vad har du för övre gräns på ålder? - Över naveln!	Pucci för faaan	2015-08-21 19:58:13.060939	2015-08-21 19:58:13.060939		\N	\N	\N	\N
+420	Men Hedvig här är ju ditt bröst, här finns ju inget!	Jenna	2015-09-01 16:12:23.760198	2015-09-01 16:12:23.760198	Inför ÖlhäfvsnØllan-entrén	\N	\N	\N	\N
+421	Nu tar vi KOKS!	Adam	2015-09-05 19:36:43.464874	2015-09-05 19:36:43.464874	Efter internfest-gasquen	\N	\N	\N	\N
+422	Jag ska moona nØllan med mina frambröst. Nej jag menar rumpa!	Jenna	2015-09-07 14:26:02.526677	2015-09-07 14:26:02.526677	Jenna provar drifterbaddräkt och ska få axelband.	\N	\N	\N	\N
+423	Fan vad enkelt det måste vara att köpa droger när man kan swisha folk	Jennifer	2015-09-07 17:08:59.510437	2015-09-07 17:08:59.510437	Under en paus i mötet	\N	\N	\N	\N
+424	Nu började jag tänka på sex.	Hedvig	2015-09-09 11:17:53.439015	2015-09-09 11:17:53.439015	I Bax när Jenna började tänka på när hon var liten.	\N	\N	\N	\N
+426	Det är inte ens att krydda, det är att peppra något som inte finns.	Elin	2015-09-26 09:52:05.124532	2015-09-26 09:52:05.124532	Biarritz, om beröm från surfinstruktören	\N	\N	\N	\N
+428	"Du måste ju vakta din hund!!" - "Men jag ropade ju på honom!"	Agnes och Nisse	2015-10-01 20:15:21.822384	2015-10-01 20:15:44.367045	ölowhiskey om sparkles	\N	\N	\N	\N
+430	Nils sitter i hans knä. Jag ska också provsitta honom!	Sittvig	2015-10-01 22:07:03.345298	2015-10-02 15:39:24.00283	Klubbvig tittar på Nils som sitter i Pontus knä	\N	\N	\N	\N
+427	Jag råkade ta på nåns rumpa och den var blöt!	Jenna	2015-10-01 19:51:57.963937	2015-10-03 13:42:24.987	Ö&W	\N	\N	\N	\N
+433	Dubbelstöten – en stor öl. Som är äcklig!	pls bränn	2015-10-07 18:42:20.810794	2015-10-07 18:42:39.396454	Williams Ginger Beer	\N	\N	\N	\N
+434	Det finns väl inget plus på en mac?	Adam "Civilingenjör" Denlert	2015-10-10 11:13:22.945589	2015-10-10 11:13:22.945589	Adam försöker zooma	\N	\N	\N	\N
+443	neeeEEjj alltså jag HÖRDE ju i ögonvrån vad ni sa	Ecolm	2015-11-16 19:32:35.723267	2015-11-16 19:32:35.723267	han snackar skit	\N	\N	\N	\N
+431	Så ligger man här och är slak	Jonas	2015-10-04 12:05:23.642643	2015-10-04 18:30:29.629424	Jonas sitter(ligger?) på pendeln inklämd mellan flera personer.. Resan fortsatte i tystnad.	\N	\N	\N	\N
+425	"Sjukt att det bara tog 70 sekunder." -  "Men var det inte typ en minut och 10 sekunder?"	Shap & Mathvig	2015-09-10 17:21:45.994275	2015-10-04 18:31:16.909983	Apropå att Reclaimbiljetterna gick åt snabbt.	\N	\N	\N	\N
+435	Fuck it, vi gör en swaztika	Aron / Shappe	2015-10-17 15:16:13.889531	2015-10-17 15:16:13.889531	Ledningsgruppen	\N	\N	\N	\N
+429	Gå in på Blutooth och skicka batteri till mig!	Jonathan till Adam	2015-10-01 21:17:38.587454	2015-10-22 22:27:03.308184	Slussen efter ÖoW	\N	\N	\N	\N
+436	Släpp penisen!	Matteus	2015-10-25 01:30:38.629626	2015-10-25 01:30:38.629626	När Jonas och Matteus har böghögs-kamp	\N	\N	\N	\N
+437	-Josefin är nya BakismonGO 3.0 -det låter rimligt...	Adam och Josefin	2015-10-25 13:46:46.649049	2015-10-25 13:46:46.649049	Vid tröjnamnsbestämning	\N	\N	\N	\N
+438	-Beslutsångest är fan det värsta som finns. -Njaaaaeeeeee	Air Bear o Shap	2015-10-26 19:17:34.59826	2015-10-26 19:17:34.59826	Inzuip	\N	\N	\N	\N
+439	Shit, nu ska jag fan hem och käka en burk Nutella	NUTTELLAAAAA	2015-11-01 04:09:17.043962	2015-11-01 04:09:17.043962	Efter en lång tentapub.	\N	\N	\N	\N
+440	JAG VILL INTE PRATA MED HONOM, JAG VILL BARA TITTA PÅ HONOM!	Jossan	2015-11-12 02:11:41.8793	2015-11-12 02:11:41.8793	om modell-ettan	\N	\N	\N	\N
+441	Jag vill inte se på honom, jag vill bara KOLLA PÅ HONOM 	Jossan	2015-11-12 02:12:14.811	2015-11-12 02:12:14.811	angående den mysteriska snygg-ettan	\N	\N	\N	\N
+442	Alltså jag har inte ens scooter-körkort!	Tuffa Jossan	2015-11-16 17:35:15.837132	2015-11-16 17:35:15.837132	Angående brist av körkort	\N	\N	\N	\N
+444	Undrar om man kan drunkna i potatismos?	Jonas "Nietzsche" Isacson	2015-11-18 16:04:02.702694	2015-11-18 16:04:23.329618	Adam var matansvarig för en untzdagspub.	\N	\N	\N	\N
+445	Emil och frukost är som Romeo&Julia. De lever eller dör tillsammans	Mulle	2015-11-19 01:16:28.571862	2015-11-19 01:16:28.571862	Om att Emil inte vill missa maten på Punschbrunchen	\N	\N	\N	\N
+446	Det är som att nån skulle berätta att du har en tredje pappa	Pappvig	2015-11-21 17:13:50.620598	2015-11-21 17:13:50.620598	Köttfesten	\N	\N	\N	\N
+447	Visa din inre Patte!	Shappe	2015-11-21 20:57:00.525284	2015-11-21 20:57:00.525284	Om att visa "såjävlaenkelt"-spirit i beer pong 	\N	\N	\N	\N
+448	Inte ens när slumpen avgör kan ni vinna!	Shappe	2015-11-22 19:08:24.555182	2015-11-22 19:08:24.555182	Köttbattle. Don't fuck up...	\N	\N	\N	\N
+449	Jag kan inte ens namnen på alla i det här rummet	Jossan the Clique Leader #1	2015-11-23 15:12:57.147013	2015-11-23 15:12:57.147013	Sitter i mötesrummet med halva DKM	\N	\N	\N	\N
+450	Det finns ju en hel del tjejer på data. Minst 15 i alla fall. 	Mallecolle	2015-11-23 15:13:09.839127	2015-11-23 15:13:09.839127	Het diskussion i mötesrumet.	\N	\N	\N	\N
+452	Media är sjuk	Jenna	2015-11-23 19:17:36.617345	2015-11-23 19:17:36.617345	angående att Media ofta inte har råd med saker när man tar upp att något behövs i Meta	\N	\N	\N	\N
+453	Du vill force pulla!	Aron	2015-11-24 15:28:32.277439	2015-11-24 15:28:32.277439	Våld är najzz?!	\N	\N	\N	\N
+454	Det är SÅ svårt att inte tänka på sex	gitvig	2015-11-24 15:32:56.526967	2015-11-24 15:32:56.526967	git pull	\N	\N	\N	\N
+455	Nästa år när vi tar in nya ska de fan heta högrev!	Malcolm af Kött	2015-11-26 00:36:40.955653	2015-11-26 03:32:20.380551	Under onsdagspubsstäd.	\N	\N	\N	\N
+456	Är det du som har skrivit "Jag har en dirty secret som INGEN vet..."? 	Jossis 	2015-11-28 01:21:03.520432	2015-11-28 01:21:03.520432	Till hemlvig på Talent eye.	\N	\N	\N	\N
+457	Vet ni hur många artister JAG har upptäckt???	Josefin "Columbus" Nilsson 	2015-11-28 01:30:42.95888	2015-11-28 01:30:42.95888	Jossan liggandes på golvet hos TalentEye	\N	\N	\N	\N
+458	Om du ba sväljer har vi inget problem!	Martin	2015-11-29 12:22:18.652822	2015-11-29 12:22:18.652822	Jonathan gör inte som Martin vill	\N	\N	\N	\N
+459	Vad svårt det är att svälja med munnen full	svälj-jenna	2015-11-29 12:33:57.399753	2015-11-29 12:33:57.399753	på punschbrunch	\N	\N	\N	\N
+460	Känn! Det är fuktigt	SnuskJonathan	2015-11-29 13:59:26.68175	2015-11-29 13:59:26.68175	Helt oprovocerat under PurreB	\N	\N	\N	\N
+461	Asså, jag e så trött och otaggad på detta just nu, pallar inte ens dansa...	Malle 	2015-11-29 18:31:34.277905	2015-11-29 18:31:34.277905	Går sedan och dansar. 	\N	\N	\N	\N
+462	WAKE UP MULLE!	Josefin "Törnrosa" Nilsson	2015-11-30 18:04:26.0901	2015-11-30 18:04:26.0901	Mulle lyssnar inte på mötet. Jossan är den som säger ifrån.	\N	\N	\N	\N
+451	De ligger fysiskt med varandra, vi ligger MENTALT med varandra	Jenna 	2015-11-23 17:11:50.611643	2015-11-30 18:06:07.368443	Angående incest i MKM	\N	\N	\N	\N
+463	Skulle du smaka på min gröt, så skulle du aldrig någonsin igen smaka något annat.	Jossan	2015-12-02 10:50:51.75331	2015-12-02 10:50:51.75331	More fun without it...	\N	\N	\N	\N
+464	Jag kommer inte ihåg, det var någon som sa någonting men jag lyssnade inte så mycket 	Adam	2015-12-02 17:17:49.990132	2015-12-02 17:17:49.990132	Ur kontext på Untzdagspub	\N	\N	\N	\N
+465	Nu åker du upp på skalan	Fitt-Adam	2015-12-02 17:18:46.404564	2015-12-02 17:18:46.404564	Alltid till alla	\N	\N	\N	\N
+466	Ni är alla fitt-någonting, men jag är bara snäll	Fitt-Martin	2015-12-05 02:34:59.992148	2015-12-05 02:34:59.992148	Han blev ledsen under kurrefekke2.0	\N	\N	\N	\N
+467	-Sundbyberg är Sveriges minsta kommun sett till storlek. De är minst sett i allt. -They got it from their Daddys	Jonas och Mulle	2015-12-08 18:02:09.408923	2015-12-08 18:02:09.408923	PSY	\N	\N	\N	\N
+469	NEEJ jag kommer svettas och spy!	Malle	2015-12-11 11:52:05.626148	2015-12-11 11:52:05.626148	Får Helenas jacka i bilen på G till MO, tror han ska bli åksjuk.	\N	\N	\N	\N
+470	jag ångrar att jag inte trimmade brösthåret för det här	Jonsanta	2015-12-12 20:19:24.216466	2015-12-12 20:19:24.216466	DJulmiddagen 	\N	\N	\N	\N
+471	-Är du otrogen? -Vi kan ha ett sådant där polynomförhållande!	Shappe och Helena	2015-12-14 12:46:19.255872	2015-12-14 12:46:19.255872	Jossan paxlar Helena. Shappe säger ifrån, och Helena kommer med en (matematisk) lösning!	\N	\N	\N	\N
+472	Fråga Arons tjej, hon är sugen på korv!	Malle	2015-12-16 22:28:24.748073	2015-12-16 22:28:24.748073	Being a douche? Eller diskuterar vegkorv? Who knows?	\N	\N	\N	\N
+473	fan va gött det vore att ha en sexslav ändå	shayan	2015-12-16 23:47:41.19866	2015-12-16 23:48:10.824016	... någon frivillig?	\N	\N	\N	\N
+474	Det är som att köpa 3 för 2, när du bara behöver köpa 1.	Nille the 1 & only	2015-12-18 20:29:48.350259	2015-12-18 20:29:48.350259	Om Marvel-filmer	\N	\N	\N	\N
+475	"jag har inte haft den här toppen sen Budapest! " "kul för dig att du har en sån omfattande garderob....."	sparks till hedvig	2015-12-19 19:58:34.158209	2015-12-19 19:58:34.158209	hedvig försöker showa off	\N	\N	\N	\N
+476	Jag har inte spelat särskilt många dataspel...	JossaN^	2015-12-28 09:02:52.293643	2015-12-28 09:02:52.293643	... Rabblar under den efterföljande timmen upp minst 10 spel hon har spelat mycket.	\N	\N	\N	\N
+477	Amen vafaaan! Det är banan överallt!	Bananathan	2016-01-04 18:21:00.031359	2016-01-04 18:21:00.031359	Out of context	\N	\N	\N	\N
+478	Ååh, Kan du spruta lite på mig?	Mallelicious till Jånathan	2016-01-06 18:55:24.233878	2016-01-06 18:55:24.233878	Out of context	\N	\N	\N	\N
+479	-Jag skäms så mycket för min årskurs. - Det enda positiva är att vi då framstår som bättre än vad vi är!	Jossan och Helena	2016-01-08 08:22:31.045821	2016-01-08 08:22:31.045821	Ovve-Axel tar Swish för linalg-lösningar.	\N	\N	\N	\N
+481	-Har ni hört att David Bowie har dött? -Ja, han slutar aldrig att överraska.	Samuels farmor?	2016-01-11 08:52:51.923252	2016-01-11 08:52:51.923252	Angående att David Bowie har gått bort.	\N	\N	\N	\N
+480	Ge mig en "RIKTIG" källa, från Internet!	Adam "källkritikern" Denlert	2016-01-10 10:44:22.28483	2016-01-11 08:53:05.320971	Linalg	\N	\N	\N	\N
+483	Jag har saknat er så mycket! ...jag förstår inte varför	Shappe	2016-01-13 13:55:53.916606	2016-01-13 13:55:53.916606	Hälsar på Hedvig och Jenna efter jullovet	\N	\N	\N	\N
+482	Jag HATAR när folk kör sådan där låtsasjapanska! Nu går jag.	Josefinerru	2016-01-13 13:16:13.072087	2016-01-14 16:51:37.882356	Stormar ut ur matsalen i Nymble mitt under pågående posttentamyslunch.	\N	\N	\N	\N
+484	Jag kanske drar en snabbis och möter upp folk i bh om jag hinner	Snuskvig	2016-01-16 20:52:16.121787	2016-01-16 20:52:16.121787	no @bh	\N	\N	\N	\N
+485	Ånej det sprutade..!	Jenna J	2016-01-18 18:14:06.747931	2016-01-18 18:14:06.747931	Out of context	\N	\N	\N	\N
+486	Det bästa med att ha en klubbmästare som inte dricker är...	Jenna	2016-01-18 19:27:41.187414	2016-01-18 19:27:41.187414	Måndagsmot. Menade ordförande. Blev fel...	\N	\N	\N	\N
+487	Jag kan få dig röd på riktigt!	Paulious	2016-01-25 17:06:38.089114	2016-01-25 17:06:38.089114	Till Heleeeeeen	\N	\N	\N	\N
+488	Har du hookat med någon? Hur länge hade ni sex?	Paaulllio	2016-01-25 17:07:08.56334	2016-01-25 17:07:08.56334		\N	\N	\N	\N
+489	Vem har gjort den här?	Heileeiina	2016-01-25 17:09:35.820299	2016-01-25 17:09:44.982083	Såg snygg kille, wanna meet dem parents	\N	\N	\N	\N
+490	Det är typ det enda vi gör, vi är elak människor	Helelak	2016-01-25 18:08:58.393857	2016-01-25 18:08:58.393857	Försöker övertyga Malle att vara dryg	\N	\N	\N	\N
+492	Den tar sönder mina tankar!	Pontus Mathematicus	2016-01-26 12:32:45.678324	2016-01-26 12:32:52.7736	Angående seminarieuppgift i envarren.	\N	\N	\N	\N
+491	Kan vi inte bara... sätta oss på en buss och åka till ÅRE!?	Pontus	2016-01-26 11:33:53.831399	2016-01-26 12:33:08.063778	Full som en kastrull och precis satt sig på dÅre-bussen	\N	\N	\N	\N
+493	Hur kan du inte suga på en klubba men ändå suga på en... eh...	klubbvig	2016-01-26 14:24:46.223841	2016-01-26 14:24:46.223841	Jenna tuggar på klubban	\N	\N	\N	\N
+495	Jag skulle få ut penisen!	Porrjonas	2016-01-27 18:58:46.509842	2016-01-27 18:58:46.509842	Har sönder ananasen som Shappe ska göra drink i.	\N	\N	\N	\N
+496	Alltså den är så bra att JAG KOMMER!	Shappelicious	2016-01-28 20:16:26.0337	2016-01-28 20:16:26.0337	Shappe är svin-packed på alk och RedBull och tämligen förtjust i de nya skraporna under städningen	\N	\N	\N	\N
+497	alltså de var söta men får bara associationer till testiklar och blöjor	Hedvig	2016-01-28 20:16:28.593898	2016-01-28 20:16:28.593898	Is this the new cute?	\N	\N	\N	\N
+498	Vi kan ha Doot-camp!	Samuel	2016-02-01 08:46:50.23049	2016-02-01 08:46:50.23049	Om bootcamp inför Toughest2016	\N	\N	\N	\N
+499	Adam har ju inte jobbat sedan 2014	Robinson-Emil	2016-02-01 18:02:22.297094	2016-02-01 18:02:22.297094	Adam ligger i en fyllehög i förrådet under robinson-pub	\N	\N	\N	\N
+500	jag blev av med min oskuld när jag var medvetslös	mallelicious	2016-02-06 15:46:28.842281	2016-02-06 15:46:28.842281	@preblot	\N	\N	\N	\N
+501	- Vilken fin råtta! - Vi döper den till Jennifer!	Shappe, Pontus	2016-02-06 17:47:20.755441	2016-02-06 17:48:00.254609	Genomfart i Kista till blotet	\N	\N	\N	\N
+502	Doesn't määtter, Hallands fläder!	Emilem*, rhyme-master 	2016-02-06 21:52:49.242346	2016-02-06 21:52:49.242346	Bloootet	\N	\N	\N	\N
+503	Flyttlådor, best kind of l(å)oads. 	Shuppie 	2016-02-07 00:09:28.099557	2016-02-07 00:09:28.099557	Såg Arons flyttlådor 	\N	\N	\N	\N
+504	Om jag inte la så mycket tid på att ta skit från dig skulle jag fan tagit examen	Aron	2016-02-11 21:34:30.320155	2016-02-12 12:42:24.954261	Till Adam	\N	\N	\N	\N
+505	Man vill inte vara cool kid, man vill vara correct kid	Jossan, rebel by heart	2016-02-15 11:52:55.968411	2016-02-15 11:52:55.968411		\N	\N	\N	\N
+506	Kan vi inte införa VALP, (Vård Av LabbPartner), när man behöver carrya sin labbpartner?	Aron	2016-02-15 17:51:22.241786	2016-02-15 17:51:22.241786	Nya kurantstadgar	\N	\N	\N	\N
+507	Det där ser fan ut som nacka!	Shappe 	2016-02-15 20:52:01.645776	2016-02-15 20:52:20.782092	I nacka 	\N	\N	\N	\N
+494	Jag är hård. Hård mot de hårda och HÅRD MOT DE SVAGA!	Robinson-Jossan	2016-01-27 17:15:02.222122	2016-02-16 20:50:33.613201	Röstning på Robinsonpuben	\N	\N	\N	\N
+508	Jag var typ en fullvuxen kvinna i sexan!	José	2016-02-17 13:24:02.672923	2016-02-17 13:24:02.672923	Tittandes på Adams gamla skolfoton	\N	\N	\N	\N
+509	alltså jag skulle ju inte vilja vara stora skeden med Pontus	Smaldam	2016-02-17 13:28:50.945633	2016-02-17 13:28:50.945633	storlekskomplex/semesterpubbiii	\N	\N	\N	\N
+510	Är de body shots eller....?	Jånashot	2016-02-17 13:53:10.577237	2016-02-17 13:53:10.577237	Konversation om stjärntecken.	\N	\N	\N	\N
+511	Vill du ligga med henne så kan du ligga med henne	Pimp-Adam	2016-02-17 14:53:40.250824	2016-02-17 14:53:40.250824	#SorrePurre / Thai-Jennifer	\N	\N	\N	\N
+517	Men vad ska de göra på sängen?!?!'	Aron	2016-02-17 15:15:57.11708	2016-02-17 15:15:57.11708	Malle på sängen 	\N	\N	\N	\N
+518	I en säng STÅR MAN UPP!	Paul	2016-02-17 15:16:48.156643	2016-02-17 15:16:48.156643	semesterpub. nuff said	\N	\N	\N	\N
+519	Fuck you Adam, Adam du är bääääääst	Helllllena	2016-02-17 16:43:34.374364	2016-02-17 16:43:34.374364	Inom loppet av 1 min 	\N	\N	\N	\N
+520	Jag kan trolla fram pengar från var som helst!	Josefin "Cash Finns" Nilsson	2016-02-17 18:33:15.327123	2016-02-17 18:33:15.327123	Drar fram en 20-kronorssedel ur (kläderna?!) , fast har hon ens några fickor?	\N	\N	\N	\N
+521	Du har för hård rumpa!	Adam	2016-02-17 22:10:56.812814	2016-02-17 22:10:56.812814	Adam till Aron under semesterpuben.	\N	\N	\N	\N
+522	Okej, så: nu är inte jag sådär jättehaj på rondeller.. Hur ska jag köra?	Jossan	2016-02-19 12:32:50.816354	2016-02-19 12:32:50.816354	Påväg till MO	\N	\N	\N	\N
+523	- Den här och man är good to go!, - If you are brave enough	Jossan, Pervdam	2016-02-19 13:49:23.569683	2016-02-19 13:49:23.569683	Jossan plockar fram största gurkan i världen @MO	\N	\N	\N	\N
+538	Jag har en nipple ute. Det är inte ens två  	Shappy 	2016-03-12 01:55:52.808139	2016-03-12 01:55:52.808139	På golvet 	\N	\N	\N	\N
+525	You need to know your rubber man. Du kan ju inte komma dit och så passar det inte	Rubbermaster Jonas	2016-02-19 15:15:20.458826	2016-02-19 15:15:36.159261	Angående "gummisnoddarna" på plumsprepp	\N	\N	\N	\N
+526	Äre mutta till lunch imorgon?	Dirty Jenna	2016-02-19 16:51:56.288719	2016-02-19 16:51:56.288719	nuff said	\N	\N	\N	\N
+524	Man tar ju inte alla som det inte är fel på	Relationsexperten Malle	2016-02-19 15:13:12.626661	2016-02-21 03:56:18.993119	Angående vad det är för fel på hans dejt	\N	\N	\N	\N
+527	Plötsligt känner jag mig så massproducerad.	Jenna Barbie Girl	2016-02-19 17:14:46.338427	2016-02-21 13:29:22.691568	Out of context	\N	\N	\N	\N
+528	Martin var så gullig! Han kallade mig bara för fitta 2 gånger den kvällen!	Jenna	2016-02-23 11:20:39.97523	2016-02-23 11:20:39.97523	Fitt-Martin expectations	\N	\N	\N	\N
+531	Ahmenvafaan inte bokföring igen!	Fitt-Martin	2016-03-04 14:09:38.250943	2016-03-04 14:10:02.181231	Gamla misstag i Fitt-Mage uppenbarar sig vid bokslutet, och Martin måste förklara hur han tänkt.	\N	\N	\N	\N
+529	-Har man förlovningsringen på vänster hand? -Asso har du ALDRIG varit förlovad eller..?	Ringvig, Mrs. Jossan	2016-02-29 16:27:35.558135	2016-03-04 14:11:03.836003	Om att tjejer får fria på Skottdagen	\N	\N	\N	\N
+532	Det är som radiobilar fast för människor	Pontus	2016-03-11 16:49:54.869174	2016-03-11 16:49:54.869174	Om Moshpits	\N	\N	\N	\N
+534	Näää.... Näää.... Nu är jag blöt. 	Blötcolm	2016-03-11 23:54:54.556738	2016-03-11 23:54:54.556738	Han blev blöt	\N	\N	\N	\N
+535	Hur kommer det sig att ni får ligga men inte jag?	Malle	2016-03-12 01:46:06.406865	2016-03-12 01:46:06.406865	Fick inte ligga (i soffan)	\N	\N	\N	\N
+537	Jag kommer mörbulta din pung!	Pungcolm 	2016-03-12 01:48:09.999699	2016-03-13 16:19:28.61286	Avundsjuk bredvid soffan 	\N	\N	\N	\N
+539	-Vad är eldfesten? -DetärdendärfestenikungsträdgårdensomShappevillattviskagåpåmensomingenkommergåpå...	Snapcolm 	2016-03-14 17:39:26.304864	2016-03-14 17:40:33.984476	Shapps fölsisdag :(	\N	\N	\N	\N
+540	Var det verkligen en legit spådam?!	Hokus pEmil	2016-03-22 17:42:30.053132	2016-03-22 17:42:30.053132	@bontouch	\N	\N	\N	\N
+541	Det är en illustration!	Adam The Illusionist	2016-03-22 17:44:46.479305	2016-03-22 17:44:46.479305	Om hur världen är en diktatur	\N	\N	\N	\N
+542	Det skulle kunna va min typ, stora svarta män	Axel	2016-03-23 11:09:14.021281	2016-03-23 11:09:14.021281	Samtal om livet	\N	\N	\N	\N
+543	Vad ska man ta då? Det är ju som ett smörgåsbord med sprit!	Pontus Spritimus	2016-03-23 23:10:03.058921	2016-03-23 23:10:03.058921	Sprilleferre	\N	\N	\N	\N
+545	Jag ska klippa av dig dreadsen på DÖMD!	Knivväst	2016-03-24 03:10:13.028094	2016-03-24 03:11:44.093655	Aron till Pontus, på bred Göteborska	\N	\N	\N	\N
+546	Jag tycker inte ens om Göteborg...	Götelabaron	2016-03-24 03:12:45.550626	2016-03-24 03:12:45.550626	På bred Göteborgska	\N	\N	\N	\N
+544	Jag känner mig lite som King Kong. Som ett djur i bur.	Götelabaron	2016-03-24 03:07:56.129226	2016-03-24 18:39:37.29973	På bred göteborgska om sin göteborgska.	\N	\N	\N	\N
+547	15cm... Hur ska man penetrera det???	Shappy 	2016-03-25 22:21:31.222172	2016-03-25 22:21:31.222172	Shappe leker snickare.	\N	\N	\N	\N
+548	Oj, ska vi ens ner här? Glömde bort att tänka	Robo	2016-03-26 08:47:27.5185	2016-03-26 08:47:27.5185	Tuben i HK	\N	\N	\N	\N
+552	Alltså sex tar såååå lång tid	Shappe "quickie" Jahanshahi 	2016-04-01 14:46:40.849218	2016-04-01 14:46:40.849218	Matlablabb	\N	\N	\N	\N
+549	Det som händer i mötesrummet stannar i mötesrummet!	Mulle	2016-03-26 16:06:54.487418	2016-03-26 16:07:48.829103	Stay Safe	\N	\N	\N	\N
+550	Kan vi inte ha en Afrika-pub? Typ Mahatma Ghandi-pub!	Malle den Allvetande	2016-03-28 17:06:56.72784	2016-03-28 17:06:56.72784	MMöte	\N	\N	\N	\N
+551	Som vuxen kvinna måste du kunna ta större!	Sexcolm 	2016-03-30 23:39:00.039297	2016-03-30 23:39:00.039297	I diskussion med Jossan	\N	\N	\N	\N
+553	Ryan Gosling är ju inte direkt en kille som om man ser honom i META tänker "wow" 	Helena Somerhalder 	2016-04-02 10:33:14.420298	2016-04-02 10:33:14.420298	Bildgooglar snygga killar	\N	\N	\N	\N
+554	TIO SEKUNDERS SUUUG	Malle	2016-04-02 18:43:40.665556	2016-04-02 18:43:40.665556	Till Jossan när Real Madrid fick gult kort	\N	\N	\N	\N
+555	Nu går vi in för hemmafruar, sen vatten. that's what about to happen 	Mallecolle 	2016-04-02 23:43:56.547249	2016-04-02 23:43:56.547249	Tentapubbizzz 	\N	\N	\N	\N
+556	Ska vi upp å dansa loss, eller ska vi upp å knulla loss???	Knullcolm 	2016-04-02 23:57:43.856372	2016-04-02 23:57:43.856372	.....	\N	\N	\N	\N
+557	Oj! det är typ första gången jag ser min arm	Shayarm	2016-04-03 06:49:00.478979	2016-04-03 06:49:00.478979	BOOM 💣 tattoo	\N	\N	\N	\N
+558	Fuck me once, ow that hurt. Fuck me twice, please at least use lube.	Aron "många bollar i luften" Strandberg	2016-04-04 21:33:10.583479	2016-04-04 21:33:10.583479	För många ansvar på för lite tid.	\N	\N	\N	\N
+559	Vänta. Hur skriver man lilla "r" nu igen?	Adam "Memento" Denlert	2016-04-06 13:44:38.602812	2016-04-06 13:44:38.602812	Adam har varit borta från plugget i en vecka. Har glömt ALLT!	\N	\N	\N	\N
+560	MEN FUCK YOU FUCKING FUCKER!	Josefin "Goosfraba" Nilsson	2016-04-07 09:22:21.307831	2016-04-07 09:22:21.307831	Matlab. Nuff said.	\N	\N	\N	\N
+561	Jag blir besviken VARJE gång det inte serveras tequila när jag kommer in i rummet	Emilio	2016-04-09 16:59:48.756428	2016-04-09 16:59:48.756428	"Jag tycker inte ens om tequila"	\N	\N	\N	\N
+562	Asså jag älskar mig själv när jag är full.	Baron 	2016-04-14 02:05:57.824408	2016-04-14 02:05:57.824408	På buss efter DPR 	\N	\N	\N	\N
+563	Sprit är makt!	Pontus "Caesar" Broberg	2016-04-18 15:41:42.445982	2016-04-18 15:41:42.445982	Måndagsmoot	\N	\N	\N	\N
+564	Kan vi inte ta en pause? -Vaddå? Tror du det är alla hjärtans dag eller?!	Samuel, Shappsinator	2016-04-19 20:36:52.406277	2016-04-19 20:38:46.833002	Beerpong. USA-Vietnam-Tyskland	\N	\N	\N	\N
+565	Fan ta min penis. Du rör inte min fitta!	Malle locolicious	2016-04-21 17:04:34.465848	2016-04-21 17:04:34.465848	DÖMD	\N	\N	\N	\N
+566	Man är beredd på att runka någon till himmelen. Så är det en jävla fitta	Filip aka FuckaUr	2016-04-22 07:37:20.527932	2016-04-22 07:37:20.527932	DÖMD - om första gången med någon ny.	\N	\N	\N	\N
+567	Kolla vilka små hus, eller nej de var bara röda	Agnes 	2016-04-22 12:41:57.834851	2016-04-22 12:41:57.834851	Hus på Linköpings campus	\N	\N	\N	\N
+568	Alltså jag känner pinnen i mitt anus!	Paul	2016-04-22 14:13:30.338881	2016-04-22 14:13:30.338881	Tintorundan 2016	\N	\N	\N	\N
+569	hur fan gör man en kullerbytta? 	a aron	2016-04-22 14:43:07.891098	2016-04-22 14:43:07.891098	dömd 16	\N	\N	\N	\N
+570	Jag tyckte fan om Tintorundan. Man blev nästan full.	CLW-Axel	2016-04-22 21:42:12.978996	2016-04-22 21:42:36.023671	Om Tinton, casually på Donken efter en redig fylla.	\N	\N	\N	\N
+571	1 knull = 1 cheese	Visdomsord på Andreas ovve	2016-04-23 11:53:35.19411	2016-04-23 11:53:35.19411	DÖMD	\N	\N	\N	\N
+572	Är det här en bra kåk?	Malle 	2016-04-23 15:22:32.88508	2016-04-23 15:22:32.88508	Ettor och treor på yatzy	\N	\N	\N	\N
+573	Jag såg precis ett av mina frön... Som jag sådde i torsdags 	Knulle 	2016-04-23 23:18:10.556033	2016-04-23 23:18:10.556033	DÖMD 	\N	\N	\N	\N
+574	Hatar KMR-folk!	Adam	2016-04-25 01:29:58.658504	2016-04-25 01:29:58.658504	Högt mitt i ett rum fullt med KMR-folk som jobbat MF/slutfesten på Valborgspubrundan.	\N	\N	\N	\N
+575	-Jag fokuserar på högerarmen. -Gör du inte alltid det?	Aron, Mulle	2016-04-27 23:44:08.530247	2016-04-27 23:44:32.806532	Aron kan inte träna biccarna med bruten handled.	\N	\N	\N	\N
+576	Jag drack det som kom i min mun	Aron	2016-04-30 22:08:02.986783	2016-04-30 22:08:02.986783	Out of CONTEX!	\N	\N	\N	\N
+577	"Adam, NEJ!" x100	AirBear	2016-05-01 00:04:24.07166	2016-05-01 00:04:24.07166	Valborg i Norra D	\N	\N	\N	\N
+578	Åh nej nu fick du ett bitmärke! ... fan va fina tänder jag har!	Sharpe	2016-05-05 19:30:33.268543	2016-05-05 19:30:33.268543	Plorre Orre Kannibal	\N	\N	\N	\N
+\.
+
+
+--
+-- Name: uquotes_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('uquotes_id_seq', 578, true);
+
+
+--
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY users (id, username, password_digest, remember_token, admin, created_at, updated_at) FROM stdin;
+1	dkm	$2a$10$vtl4TqJ3cQIlkL8YP9FHmuSDa/4fvPu/UIeiNcf6ch16zfKa4/XjG	Fp7zo-HVlrtfl26N5MpjVg	\N	2012-11-02 13:26:11.079224	2013-11-01 23:40:34.704916
+2	admin	$2a$10$WTFfBfOn9OPEKuxBwg0KDuAQnievPnTOCJ.wImdydsQzbNwWvjBtW	r_Mysm-WNrUK_ko9HRNEtQ	t	2014-09-12 14:16:02.043141	2014-09-12 14:16:02.043141
+\.
+
+
+--
+-- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('users_id_seq', 2, true);
+
+
+--
+-- Name: uquotes_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY uquotes
+    ADD CONSTRAINT uquotes_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (version);
+
+
+--
+-- PostgreSQL database dump complete
+--
+
